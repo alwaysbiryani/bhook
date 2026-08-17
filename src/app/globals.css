@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ *
+ *  Dabba Never Comes — "Steel Thali" design tokens
+ * ------------------------------------------------------------------ */
+
+@theme {
+  /* Brand palette */
+  --color-ink: #0c1512;
+  --color-ink-2: #101d18;
+  --color-leaf: #1b4d3e;
+  --color-leaf-2: #14382d;
+  --color-bandhani: #d6336c;
+  --color-bandhani-ink: #b7245a;
+  --color-turmeric: #f5b301;
+  --color-steel: #dcdfda;
+  --color-steel-dim: #9aa39c;
+  --color-chalk: #faf8f3;
+
+  /* Dietary marks (used ONLY on the veg/non-veg dot) */
+  --color-veg: #1f7a4d;
+  --color-nonveg: #9e2a2b;
+  --color-egg: #c98a00;
+
+  /* Fonts (wired in layout.tsx via next/font variables) */
+  --font-display: var(--font-kalnia), Georgia, serif;
+  --font-deva: var(--font-tiro-deva), var(--font-body), sans-serif;
+  --font-body: var(--font-onest), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 26px;
+
+  /* Soft, warm, ink-tinted shadows (never pure black) */
+  --shadow-sheet: 0 -8px 40px -12px rgba(0, 0, 0, 0.55);
+  --shadow-card: 0 2px 14px -8px rgba(12, 21, 18, 0.6);
+  --shadow-pop: 0 12px 40px -14px rgba(12, 21, 18, 0.7);
+}
+
+/* ------------------------------------------------------------------ *
+ *  Base
+ * ------------------------------------------------------------------ */
+
+:root {
+  color-scheme: dark;
+  --page: var(--color-ink);
+  --text: var(--color-chalk);
+}
+
+html {
+  height: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  min-height: 100%;
+  background: var(--page);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.55;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Every number in the app is tabular mono so it ticks instead of reflowing. */
+.tnum {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+  letter-spacing: -0.01em;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+.font-deva {
+  font-family: var(--font-deva);
+}
+
+/* Focus ring — visible, on-brand */
+:where(a, button, input, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-turmeric);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Thin, steel scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-steel-dim) transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Hide scrollbar on horizontal rails while keeping scroll */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
