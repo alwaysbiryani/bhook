@@ -1,6 +1,7 @@
 import type { Dish } from "@/data/schema";
 import { VegMark } from "@/components/ui/VegMark";
 import { DishImage } from "@/components/DishImage";
+import { AddButton } from "@/components/AddButton";
 import { rupee, pct } from "@/lib/format";
 import { SPICE_LEVELS } from "@/data/options";
 
@@ -44,12 +45,7 @@ export function DishRow({ dish, hue }: { dish: Dish; hue: number }) {
         <div className="aspect-square overflow-hidden rounded-xl border border-steel/10">
           <DishImage art={dish.art} hue={hue} seed={dish.slug} alt={dish.name} className="h-full w-full" />
         </div>
-        <button
-          type="button"
-          className="absolute -bottom-3 left-1/2 -translate-x-1/2 rounded-lg border border-bandhani/40 bg-chalk px-6 py-1.5 text-sm font-bold uppercase tracking-wide text-bandhani shadow-pop transition active:scale-95"
-        >
-          Add
-        </button>
+        <AddButton dishSlug={dish.slug} />
       </div>
     </article>
   );

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Kalnia, Onest, Geist_Mono, Tiro_Devanagari_Hindi } from "next/font/google";
 import "./globals.css";
+import { AppChrome } from "@/components/AppChrome";
 
 const kalnia = Kalnia({
   variable: "--font-kalnia",
@@ -56,7 +57,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       className={`${kalnia.variable} ${onest.variable} ${geistMono.variable} ${tiroDeva.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {children}
+        <AppChrome />
+      </body>
     </html>
   );
 }
