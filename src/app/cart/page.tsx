@@ -7,7 +7,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Thali } from "@/components/thali/Thali";
 import { DishImage } from "@/components/DishImage";
 import { VegMark } from "@/components/ui/VegMark";
-import { PriceTicker } from "@/components/PriceTicker";
+import { BillBreakdown } from "@/components/BillBreakdown";
 import { useStore } from "@/store/useStore";
 import { useUI } from "@/store/useUI";
 import { cartTotals } from "@/lib/cart";
@@ -23,9 +23,8 @@ export default function CartPage() {
   const decLine = useStore((s) => s.decLine);
   const openAddress = useUI((s) => s.openAddress);
 
-  const { itemTotal, itemMrp, count, hydrated } = cartTotals(lines);
+  const { count, hydrated } = cartTotals(lines);
   const restaurant = cartRestaurant ? getRestaurant(cartRestaurant) : undefined;
-  const saved = itemMrp - itemTotal;
 
   if (count === 0) {
     return (
@@ -120,20 +119,10 @@ export default function CartPage() {
           ))}
         </section>
 
-        {/* Subtotal preview (full bill + coupons arrive in Phase 3) */}
-        <section className="mt-5 rounded-2xl border border-steel/10 bg-ink-2/60 p-4">
-          <div className="flex items-center justify-between text-sm">
-            <span className="text-steel">Item total</span>
-            <PriceTicker value={itemTotal} className="font-semibold text-chalk" />
-          </div>
-          {saved > 0 && (
-            <div className="mt-2 flex items-center justify-between text-sm">
-              <span className="text-turmeric">Saved vs MRP</span>
-              <PriceTicker value={saved} className="font-semibold text-turmeric" prefix="−₹" />
-            </div>
-          )}
-          <p className="mt-3 text-xs text-steel-dim">Coupons, free delivery and the full bill on the next screen.</p>
-        </section>
+        {/* Full bill with coupon drawer + count-up savings */}
+        <div className="mt-5">
+          <BillBreakdown />
+        </div>
 
         <button
           type="button"
@@ -142,7 +131,7 @@ export default function CartPage() {
         >
           Proceed to pay
           <span className="opacity-60">·</span>
-          <PriceTicker value={itemTotal} />
+          <span className="tnum">₹0</span>
         </button>
       </main>
       <Footer />
