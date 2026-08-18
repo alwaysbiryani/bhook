@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BRAND } from "@/lib/brand";
+import { Logo } from "@/components/Logo";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
 
 const LINKS = [
@@ -14,8 +15,8 @@ export function Footer() {
     <footer className="mt-auto border-t border-steel/10 bg-ink-2/60">
       <div className="mx-auto w-full max-w-5xl px-5 py-8">
         <div className="flex flex-wrap items-center justify-between gap-4">
-          <Link href="/" className="font-display text-lg text-chalk">
-            {BRAND.name}
+          <Link href="/" aria-label={`${BRAND.name} — home`}>
+            <Logo className="text-lg" full />
           </Link>
           <nav className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-steel-dim">
             {LINKS.map((l) => (

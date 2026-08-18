@@ -1,16 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <rect width="512" height="512" rx="112" fill="#0c1512"/>
-  <circle cx="256" cy="262" r="150" fill="#dcdfda"/>
-  <circle cx="256" cy="256" r="150" fill="url(#g)"/>
-  <circle cx="256" cy="256" r="104" fill="#f4f6f2"/>
-  <circle cx="256" cy="248" r="40" fill="#d6336c"/>
-  <circle cx="196" cy="300" r="26" fill="#1b4d3e"/>
-  <circle cx="316" cy="300" r="26" fill="#f5b301"/>
   <defs>
-    <linearGradient id="g" x1="0" y1="106" x2="0" y2="406" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#eef1ec"/>
-      <stop offset="0.55" stop-color="#c2c7bf"/>
-      <stop offset="1" stop-color="#9aa199"/>
+    <linearGradient id="steel" x1="0" y1="140" x2="0" y2="430" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#eef1ec"/>
+      <stop offset="0.52" stop-color="#cfd4cb"/>
+      <stop offset="1" stop-color="#a3a99f"/>
     </linearGradient>
   </defs>
+  <!-- handle + knob -->
+  <path d="M182 176 C182 92 330 92 330 176" fill="none" stroke="#b6bcb3" stroke-width="26" stroke-linecap="round"/>
+  <circle cx="256" cy="104" r="24" fill="#f5b301"/>
+  <!-- top tier -->
+  <rect x="160" y="168" width="192" height="120" rx="28" fill="url(#steel)"/>
+  <rect x="184" y="192" width="70" height="20" rx="10" fill="#ffffff" opacity="0.5"/>
+  <!-- bottom tier -->
+  <rect x="144" y="292" width="224" height="132" rx="30" fill="url(#steel)"/>
+  <rect x="172" y="316" width="78" height="20" rx="10" fill="#ffffff" opacity="0.45"/>
+  <!-- clasps -->
+  <rect x="118" y="286" width="34" height="66" rx="14" fill="#d6336c"/>
+  <rect x="360" y="286" width="34" height="66" rx="14" fill="#d6336c"/>
 </svg>

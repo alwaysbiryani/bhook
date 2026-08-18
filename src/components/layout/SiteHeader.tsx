@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { BRAND } from "@/lib/brand";
+import { Logo } from "@/components/Logo";
 import { useStore, selectCartCount } from "@/store/useStore";
 import { useUI } from "@/store/useUI";
 import { getCity } from "@/data";
@@ -25,8 +25,8 @@ export function SiteHeader({ cityName }: { cityName?: string }) {
   return (
     <header className="sticky top-0 z-40 border-b border-steel/10 bg-ink/85 backdrop-blur-md">
       <div className="mx-auto flex w-full max-w-5xl items-center gap-3 px-5 py-3">
-        <Link href="/" className="font-display text-xl leading-none text-chalk">
-          {BRAND.short}
+        <Link href="/" aria-label="Dabba Never Comes — home">
+          <Logo className="text-xl" />
         </Link>
         <span className="mx-1 h-5 w-px bg-steel/15" />
         <button
