@@ -59,32 +59,32 @@ export default async function RestaurantPage({
       <main className="flex-1">
         {/* Restaurant header */}
         <section className="mx-auto w-full max-w-3xl px-5 pt-6">
-          <nav className="mb-3 flex items-center gap-1.5 text-xs text-steel-dim">
-            <Link href={`/${c.slug}`} className="hover:text-chalk">
+          <nav className="mb-3 flex items-center gap-1.5 text-xs text-dim">
+            <Link href={`/${c.slug}`} className="hover:text-fg">
               {c.name}
             </Link>
             <span>/</span>
-            <span className="text-steel">{r.area}</span>
+            <span className="text-muted">{r.area}</span>
           </nav>
 
-          <div className="rounded-2xl border border-steel/10 bg-ink-2/60 p-5">
+          <div className="rounded-2xl border border-line/10 bg-card/60 p-5">
             <div className="flex items-start justify-between gap-3">
               <div>
-                <h1 className="font-display text-3xl leading-tight text-chalk">{r.name}</h1>
-                <p className="mt-1 text-sm text-steel-dim">
+                <h1 className="font-display text-3xl leading-tight text-fg">{r.name}</h1>
+                <p className="mt-1 text-sm text-dim">
                   {r.cuisines.join(" · ")}
                   {r.since && <> · since <span className="tnum">{r.since}</span></>}
                 </p>
-                <p className="mt-0.5 text-sm text-steel-dim">{r.area}, {c.name}</p>
+                <p className="mt-0.5 text-sm text-dim">{r.area}, {c.name}</p>
               </div>
               <StarRating rating={r.rating} count={r.ratingCount} />
             </div>
 
-            <p className="mt-4 border-l-2 border-turmeric/50 pl-3 text-sm italic leading-relaxed text-steel">
+            <p className="mt-4 border-l-2 border-turmeric/50 pl-3 text-sm italic leading-relaxed text-muted">
               {r.tagline}
             </p>
 
-            <div className="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-xs text-steel-dim">
+            <div className="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-xs text-dim">
               <span className="tnum">{r.prepMins}–{r.prepMins + 8} min · never</span>
               <span className="tnum">₹{r.priceForTwo} for two</span>
               {r.bestFor && <span>Famous for {r.bestFor}</span>}

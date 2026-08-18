@@ -15,7 +15,7 @@ export function VegToggle() {
   };
 
   return (
-    <label className="flex cursor-pointer items-center gap-2 text-sm text-steel">
+    <label className="flex cursor-pointer items-center gap-2 text-sm text-muted">
       <span className="text-[color:var(--color-veg-text)]">Veg only</span>
       <button
         type="button"
@@ -24,7 +24,7 @@ export function VegToggle() {
         aria-label="Veg only"
         onClick={toggle}
         className={`relative h-6 w-11 rounded-full border transition-colors ${
-          on ? "border-veg bg-veg/25" : "border-steel/25 bg-ink-2"
+          on ? "border-veg bg-veg/25" : "border-line/25 bg-card"
         }`}
       >
         <span

@@ -52,18 +52,18 @@ export default async function CityPage({
       <SiteHeader cityName={c.name} />
       <main className="flex-1">
         <section className="mx-auto w-full max-w-5xl px-5 pt-8 pb-4">
-          <p className="text-sm text-steel-dim">{restaurants.length} restaurants</p>
-          <h1 className="mt-1 font-display text-3xl text-chalk sm:text-4xl">
+          <p className="text-sm text-dim">{restaurants.length} restaurants</p>
+          <h1 className="mt-1 font-display text-3xl text-fg sm:text-4xl">
             Never eat in {c.name}
-            {c.nameDeva && <span className="font-deva ml-3 text-2xl text-steel-dim">{c.nameDeva}</span>}
+            {c.nameDeva && <span className="font-deva ml-3 text-2xl text-dim">{c.nameDeva}</span>}
           </h1>
-          <p className="mt-2 max-w-lg text-steel">
+          <p className="mt-2 max-w-lg text-muted">
             The city&rsquo;s legends, from {c.state}. Fill your cart, watch the bill climb, pay nothing.
           </p>
         </section>
         {/* Top rated rail */}
         <section className="mx-auto w-full max-w-5xl px-5 py-4">
-          <h2 className="mb-3 font-display text-2xl text-chalk">Top rated in {c.name}</h2>
+          <h2 className="mb-3 font-display text-2xl text-fg">Top rated in {c.name}</h2>
           <div className="no-scrollbar -mx-5 flex gap-4 overflow-x-auto px-5 pb-2">
             {topRated.map((r) => (
               <div key={r.slug} className="w-64 shrink-0">
@@ -74,7 +74,7 @@ export default async function CityPage({
         </section>
 
         <section className="mx-auto w-full max-w-5xl px-5 py-6">
-          <h2 className="mb-4 font-display text-2xl text-chalk">All {restaurants.length} places</h2>
+          <h2 className="mb-4 font-display text-2xl text-fg">All {restaurants.length} places</h2>
           <CityRestaurants items={items} />
         </section>
       </main>

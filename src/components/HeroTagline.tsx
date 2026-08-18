@@ -8,5 +8,5 @@ import { heroLine, DEFAULT_KICKER } from "@/lib/heroCopy";
 export function HeroTagline() {
   const [kicker, setKicker] = useState(DEFAULT_KICKER);
   useEffect(() => setKicker(heroLine().kicker), []);
-  return <p className="text-sm font-medium text-turmeric">{kicker}</p>;
+  return <p className="text-sm font-medium text-turmeric-text">{kicker}</p>;
 }

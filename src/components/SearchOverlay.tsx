@@ -43,7 +43,7 @@ export function SearchOverlay() {
     <Sheet open={open} onClose={close} labelledBy="search-title">
       <div className="px-5 pb-8 pt-2">
         <h2 id="search-title" className="sr-only">Search</h2>
-        <div className="flex items-center gap-2 rounded-xl border border-ink/15 bg-white px-4 py-3">
+        <div className="flex items-center gap-2 rounded-xl border border-line/15 bg-card-2 px-4 py-3">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-bandhani)" strokeWidth="2" aria-hidden>
             <circle cx="11" cy="11" r="7" />
             <path d="M21 21l-4.3-4.3" />
@@ -53,47 +53,47 @@ export function SearchOverlay() {
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder="Search dishes, restaurants, cuisines…"
-            className="flex-1 bg-transparent text-ink outline-none placeholder:text-ink/40"
+            className="flex-1 bg-transparent text-fg outline-none placeholder:text-fg/40"
             aria-label="Search"
           />
           {q && (
-            <button onClick={() => setQ("")} className="text-ink/40" aria-label="Clear">✕</button>
+            <button onClick={() => setQ("")} className="text-fg/40" aria-label="Clear">✕</button>
           )}
         </div>
 
         {query.length < 2 ? (
           <div className="mt-5">
-            <p className="mb-2 text-xs font-bold uppercase tracking-wider text-ink/40">Try</p>
+            <p className="mb-2 text-xs font-bold uppercase tracking-wider text-fg/40">Try</p>
             <div className="flex flex-wrap gap-2">
               {POPULAR.map((p) => (
-                <button key={p} onClick={() => setQ(p)} className="rounded-full border border-ink/15 px-3.5 py-1.5 text-sm text-ink/70 hover:border-bandhani">
+                <button key={p} onClick={() => setQ(p)} className="rounded-full border border-line/15 px-3.5 py-1.5 text-sm text-fg/70 hover:border-bandhani">
                   {p}
                 </button>
               ))}
             </div>
           </div>
         ) : results.rests.length === 0 && results.dish.length === 0 ? (
-          <p className="mt-8 text-center text-ink/50">
+          <p className="mt-8 text-center text-fg/50">
             Nothing matches &ldquo;{q}&rdquo;. It never came either.
           </p>
         ) : (
           <div className="mt-4 space-y-5">
             {results.rests.length > 0 && (
               <section>
-                <p className="mb-2 text-xs font-bold uppercase tracking-wider text-ink/40">Restaurants</p>
+                <p className="mb-2 text-xs font-bold uppercase tracking-wider text-fg/40">Restaurants</p>
                 <div className="space-y-1">
                   {results.rests.map((r) => (
                     <button
                       key={r.slug}
                       onClick={() => go(`/${r.citySlug}/${r.slug}`)}
-                      className="flex w-full items-center gap-3 rounded-xl px-2 py-2 text-left hover:bg-ink/5"
+                      className="flex w-full items-center gap-3 rounded-xl px-2 py-2 text-left hover:bg-page/5"
                     >
                       <div className="h-11 w-11 shrink-0 overflow-hidden rounded-lg">
                         <DishImage art="thali" hue={r.hue} seed={r.slug} alt={r.name} variant="thumb" className="h-full w-full" />
                       </div>
                       <div className="min-w-0">
-                        <p className="truncate text-sm font-medium text-ink">{r.name}</p>
-                        <p className="truncate text-xs text-ink/50">{r.cuisines.slice(0, 3).join(" · ")} · {getCity(r.citySlug)?.name}</p>
+                        <p className="truncate text-sm font-medium text-fg">{r.name}</p>
+                        <p className="truncate text-xs text-fg/50">{r.cuisines.slice(0, 3).join(" · ")} · {getCity(r.citySlug)?.name}</p>
                       </div>
                     </button>
                   ))}
@@ -102,7 +102,7 @@ export function SearchOverlay() {
             )}
             {results.dish.length > 0 && (
               <section>
-                <p className="mb-2 text-xs font-bold uppercase tracking-wider text-ink/40">Dishes</p>
+                <p className="mb-2 text-xs font-bold uppercase tracking-wider text-fg/40">Dishes</p>
                 <div className="space-y-1">
                   {results.dish.map((d) => {
                     const r = getRestaurant(d.restaurantSlug)!;
@@ -110,7 +110,7 @@ export function SearchOverlay() {
                       <button
                         key={d.slug}
                         onClick={() => { close(); openDish(d.slug); }}
-                        className="flex w-full items-center gap-3 rounded-xl px-2 py-2 text-left hover:bg-ink/5"
+                        className="flex w-full items-center gap-3 rounded-xl px-2 py-2 text-left hover:bg-page/5"
                       >
                         <div className="h-11 w-11 shrink-0 overflow-hidden rounded-lg">
                           <DishImage art={d.art} hue={r.hue} seed={d.slug} alt={d.name} variant="thumb" className="h-full w-full" />
@@ -118,11 +118,11 @@ export function SearchOverlay() {
                         <div className="min-w-0 flex-1">
                           <div className="flex items-center gap-1.5">
                             <VegMark diet={d.diet} size={12} />
-                            <p className="truncate text-sm font-medium text-ink">{d.name}</p>
+                            <p className="truncate text-sm font-medium text-fg">{d.name}</p>
                           </div>
-                          <p className="truncate text-xs text-ink/50">{r.name} · {getCity(d.citySlug)?.name}</p>
+                          <p className="truncate text-xs text-fg/50">{r.name} · {getCity(d.citySlug)?.name}</p>
                         </div>
-                        <span className="tnum shrink-0 text-sm font-semibold text-ink">{rupee(d.basePrice)}</span>
+                        <span className="tnum shrink-0 text-sm font-semibold text-fg">{rupee(d.basePrice)}</span>
                       </button>
                     );
                   })}

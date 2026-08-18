@@ -130,12 +130,12 @@ export function ShareCard({
     <div className="flex flex-col items-center">
       <canvas
         ref={canvasRef}
-        className="w-full max-w-[260px] rounded-2xl border border-ink/10 shadow-pop"
+        className="w-full max-w-[260px] rounded-2xl border border-line/10 shadow-pop"
         aria-label="Shareable receipt"
       />
       <button
         onClick={download}
-        className="mt-4 flex items-center gap-2 rounded-xl bg-bandhani px-6 py-3 font-semibold text-chalk shadow-pop active:scale-95"
+        className="mt-4 flex items-center gap-2 rounded-xl bg-bandhani px-6 py-3 font-semibold text-fg shadow-pop active:scale-95"
       >
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
           <path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16" />

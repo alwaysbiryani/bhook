@@ -32,7 +32,7 @@ export function FloatingCart() {
         >
           <Link
             href="/cart"
-            className="flex w-full max-w-md items-center gap-3 rounded-2xl border border-steel/15 bg-leaf/95 px-3 py-2.5 shadow-pop backdrop-blur-md"
+            className="flex w-full max-w-md items-center gap-3 rounded-2xl border border-line/15 bg-leaf/95 px-3 py-2.5 shadow-pop backdrop-blur-md"
           >
             <motion.div
               key={pulse}

@@ -21,7 +21,7 @@ export function RestaurantCard({ r, priority = false }: { r: Restaurant; priorit
   return (
     <Link
       href={`/${r.citySlug}/${r.slug}`}
-      className="group block overflow-hidden rounded-xl border border-steel/10 bg-ink-2/60 shadow-card transition hover:border-steel/25 hover:shadow-pop"
+      className="group block overflow-hidden rounded-xl border border-line/10 bg-card/60 shadow-card transition hover:border-line/25 hover:shadow-pop"
     >
       <div className="relative aspect-[16/10] overflow-hidden">
         <DishImage
@@ -32,25 +32,25 @@ export function RestaurantCard({ r, priority = false }: { r: Restaurant; priorit
           alt={`${r.name} — illustrated`}
           className="h-full w-full transition duration-500 group-hover:scale-105"
         />
-        <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-ink to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-page to-transparent" />
         <span className="absolute bottom-2.5 left-3 rounded-md bg-turmeric px-2 py-0.5 text-[11px] font-bold text-ink">
           {r.prepMins}–{r.prepMins + 8} min
         </span>
         {r.fictional && (
-          <span className="absolute right-3 top-3 rounded-md bg-ink/70 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-steel backdrop-blur-sm">
+          <span className="absolute right-3 top-3 rounded-md bg-page/70 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-muted backdrop-blur-sm">
             Cloud kitchen
           </span>
         )}
       </div>
       <div className="p-3.5">
         <div className="flex items-start justify-between gap-2">
-          <h3 className="font-medium leading-tight text-chalk">{r.name}</h3>
+          <h3 className="font-medium leading-tight text-fg">{r.name}</h3>
           <StarRating rating={r.rating} className="mt-0.5" />
         </div>
-        <p className="mt-1 line-clamp-1 text-sm text-steel-dim">
+        <p className="mt-1 line-clamp-1 text-sm text-dim">
           {r.cuisines.slice(0, 3).join(" · ")}
         </p>
-        <div className="mt-2 flex items-center gap-2 text-xs text-steel-dim">
+        <div className="mt-2 flex items-center gap-2 text-xs text-dim">
           <span>{r.area}</span>
           <span className="h-1 w-1 rounded-full bg-steel/30" />
           <span className="tnum">₹{r.priceForTwo} for two</span>

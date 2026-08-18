@@ -42,15 +42,15 @@ export function AddressSheet() {
   return (
     <Sheet open={open} onClose={close} labelledBy="addr-title">
       <div className="px-5 pb-8 pt-2">
-        <h2 id="addr-title" className="font-display text-2xl text-ink">
+        <h2 id="addr-title" className="font-display text-2xl text-fg">
           Deliver to
         </h2>
-        <p className="mt-1 text-sm text-ink/55">
+        <p className="mt-1 text-sm text-fg/55">
           Drop the pin anywhere. Ramesh will find it, then not come.
         </p>
 
         {/* hand-drawn map */}
-        <div className="mt-4 overflow-hidden rounded-2xl border border-ink/10">
+        <div className="mt-4 overflow-hidden rounded-2xl border border-line/10">
           <svg
             ref={mapRef}
             viewBox="0 0 320 180"
@@ -98,7 +98,7 @@ export function AddressSheet() {
               className={`rounded-xl border px-4 py-2 text-sm transition ${
                 label === l
                   ? "border-bandhani bg-bandhani/10 text-[color:var(--color-bandhani-ink)]"
-                  : "border-ink/15 text-ink/70"
+                  : "border-line/15 text-fg/70"
               }`}
             >
               {l}
@@ -107,21 +107,21 @@ export function AddressSheet() {
         </div>
 
         <label className="mt-4 block">
-          <span className="text-sm font-medium text-ink/70">Flat / building / landmark</span>
+          <span className="text-sm font-medium text-fg/70">Flat / building / landmark</span>
           <input
             value={line}
             onChange={(e) => setLine(e.target.value)}
             placeholder="Flat 402, Rose Apartments, near the temple"
-            className="mt-1 w-full rounded-xl border border-ink/15 bg-white px-4 py-2.5 text-ink outline-none focus:border-bandhani"
+            className="mt-1 w-full rounded-xl border border-line/15 bg-card-2 px-4 py-2.5 text-fg outline-none focus:border-bandhani"
           />
         </label>
 
         <label className="mt-3 block">
-          <span className="text-sm font-medium text-ink/70">Area</span>
+          <span className="text-sm font-medium text-fg/70">Area</span>
           <select
             value={area}
             onChange={(e) => setArea(e.target.value)}
-            className="mt-1 w-full rounded-xl border border-ink/15 bg-white px-4 py-2.5 text-ink outline-none focus:border-bandhani"
+            className="mt-1 w-full rounded-xl border border-line/15 bg-card-2 px-4 py-2.5 text-fg outline-none focus:border-bandhani"
           >
             {city?.areas.map((a) => (
               <option key={a} value={a}>{a}</option>
@@ -132,7 +132,7 @@ export function AddressSheet() {
         <button
           type="button"
           onClick={save}
-          className="mt-6 w-full rounded-xl bg-bandhani py-3.5 font-semibold text-chalk shadow-pop transition active:scale-[0.99]"
+          className="mt-6 w-full rounded-xl bg-bandhani py-3.5 font-semibold text-fg shadow-pop transition active:scale-[0.99]"
         >
           Save address
         </button>

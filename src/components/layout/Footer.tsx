@@ -12,15 +12,15 @@ const LINKS = [
 
 export function Footer() {
   return (
-    <footer className="mt-auto border-t border-steel/10 bg-ink-2/60">
+    <footer className="mt-auto border-t border-line/10 bg-card/60">
       <div className="mx-auto w-full max-w-5xl px-5 py-8">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <Link href="/" aria-label={`${BRAND.name} — home`}>
             <Logo className="text-lg" full />
           </Link>
-          <nav className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-steel-dim">
+          <nav className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-dim">
             {LINKS.map((l) => (
-              <Link key={l.href} href={l.href} className="hover:text-chalk">
+              <Link key={l.href} href={l.href} className="hover:text-fg">
                 {l.label}
               </Link>
             ))}
@@ -28,11 +28,11 @@ export function Footer() {
         </div>
 
         <div className="mt-6">
-          <p className="mb-2 text-sm text-steel">Get updates we&rsquo;ll never send</p>
+          <p className="mb-2 text-sm text-muted">Get updates we&rsquo;ll never send</p>
           <NewsletterSignup />
         </div>
 
-        <p className="mt-6 max-w-2xl text-xs leading-relaxed text-steel-dim">
+        <p className="mt-6 max-w-2xl text-xs leading-relaxed text-dim">
           {BRAND.disclaimer} Iconic restaurants are named descriptively and factually — no logos, no
           brand colours, no implied partnership. Other listings are fictional cloud kitchens.
         </p>

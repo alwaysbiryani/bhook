@@ -58,7 +58,7 @@ export function Logo({
   return (
     <span className={`inline-flex items-center gap-2 ${className}`}>
       <LogoMark className="h-7 w-7 shrink-0" />
-      <span className="font-display leading-none text-chalk">{full ? BRAND.name : BRAND.short}</span>
+      <span className="font-display leading-none text-fg">{full ? BRAND.name : BRAND.short}</span>
     </span>
   );
 }

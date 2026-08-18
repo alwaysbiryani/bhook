@@ -64,8 +64,8 @@ export function CityRestaurants({ items }: { items: CityItem[] }) {
               aria-pressed={on}
               className={`shrink-0 rounded-full border px-4 py-1.5 text-sm transition ${
                 on
-                  ? "border-bandhani bg-bandhani/15 text-chalk"
-                  : "border-steel/15 text-steel hover:border-steel/30"
+                  ? "border-bandhani bg-bandhani/15 text-fg"
+                  : "border-line/15 text-muted hover:border-line/30"
               }`}
             >
               {f.label}
@@ -75,7 +75,7 @@ export function CityRestaurants({ items }: { items: CityItem[] }) {
       </div>
 
       {shown.length === 0 ? (
-        <p className="py-16 text-center text-steel-dim">
+        <p className="py-16 text-center text-dim">
           No place matches all that. Loosen a filter — the food still won&rsquo;t come.
         </p>
       ) : (

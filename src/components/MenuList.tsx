@@ -20,16 +20,16 @@ export function MenuList({
   return (
     <div id="menu-root">
       <div className="mb-2 flex items-center justify-between">
-        <h2 className="font-display text-xl text-chalk">Menu</h2>
+        <h2 className="font-display text-xl text-fg">Menu</h2>
         <VegToggle />
       </div>
 
       {bestsellers.length > 0 && (
         <section className="menu-section">
-          <h3 className="mt-4 text-xs font-bold uppercase tracking-wider text-turmeric">
+          <h3 className="mt-4 text-xs font-bold uppercase tracking-wider text-turmeric-text">
             Bestsellers
           </h3>
-          <div className="divide-y divide-steel/10">
+          <div className="divide-y divide-line/10">
             {bestsellers.map((d) => (
               <DishRow key={d.slug} dish={d} hue={hue} />
             ))}
@@ -38,10 +38,10 @@ export function MenuList({
       )}
 
       <section className="menu-section">
-        <h3 className="mt-6 text-xs font-bold uppercase tracking-wider text-steel-dim">
+        <h3 className="mt-6 text-xs font-bold uppercase tracking-wider text-dim">
           Everything else at {restaurantName}
         </h3>
-        <div className="divide-y divide-steel/10">
+        <div className="divide-y divide-line/10">
           {rest.map((d) => (
             <DishRow key={d.slug} dish={d} hue={hue} />
           ))}
@@ -49,7 +49,7 @@ export function MenuList({
       </section>
 
       {/* shown only when veg-only hides everything on offer */}
-      <p className="veg-empty hidden py-10 text-center text-steel-dim">
+      <p className="veg-empty hidden py-10 text-center text-dim">
         No veg options here. Some kitchens just don&rsquo;t.
       </p>
     </div>

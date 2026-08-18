@@ -82,16 +82,16 @@ export function DishSheet() {
             </span>
           )}
         </div>
-        <h2 id="dish-title" className="mt-1.5 font-display text-2xl leading-tight text-ink">
+        <h2 id="dish-title" className="mt-1.5 font-display text-2xl leading-tight text-fg">
           {dish.name}
-          {dish.nameDeva && <span className="font-deva ml-2 text-lg text-ink/50">{dish.nameDeva}</span>}
+          {dish.nameDeva && <span className="font-deva ml-2 text-lg text-fg/50">{dish.nameDeva}</span>}
         </h2>
-        <p className="mt-0.5 text-sm text-ink/55">{restaurant.name} · {restaurant.area}</p>
+        <p className="mt-0.5 text-sm text-fg/55">{restaurant.name} · {restaurant.area}</p>
         <div className="mt-2 flex items-center gap-2">
-          <span className="tnum text-lg font-semibold text-ink">{rupee(dish.basePrice)}</span>
-          <span className="tnum text-sm text-ink/40 line-through">{rupee(dish.mrp)}</span>
+          <span className="tnum text-lg font-semibold text-fg">{rupee(dish.basePrice)}</span>
+          <span className="tnum text-sm text-fg/40 line-through">{rupee(dish.mrp)}</span>
         </div>
-        <p className="mt-3 text-sm leading-relaxed text-ink/70">{dish.description}</p>
+        <p className="mt-3 text-sm leading-relaxed text-fg/70">{dish.description}</p>
 
         {/* Option groups */}
         {dish.optionGroups.map((key) => {
@@ -100,9 +100,9 @@ export function DishSheet() {
           const chosen = sel.choices[key] ?? [];
           return (
             <fieldset key={key} className="mt-6">
-              <legend className="flex items-baseline gap-2 text-sm font-semibold text-ink">
+              <legend className="flex items-baseline gap-2 text-sm font-semibold text-fg">
                 {g.label}
-                <span className="text-xs font-normal text-ink/45">
+                <span className="text-xs font-normal text-fg/45">
                   {g.type === "single" ? (g.required ? "Pick one" : "Optional") : "Add any"}
                 </span>
               </legend>
@@ -120,12 +120,12 @@ export function DishSheet() {
                       className={`rounded-xl border px-3.5 py-2 text-sm transition ${
                         on
                           ? "border-bandhani bg-bandhani/10 text-[color:var(--color-bandhani-ink)]"
-                          : "border-ink/15 text-ink/75 hover:border-ink/30"
+                          : "border-line/15 text-fg/75 hover:border-line/30"
                       }`}
                     >
                       {o.label}
                       {o.priceDelta > 0 && (
-                        <span className="tnum ml-1.5 text-xs text-ink/50">+₹{o.priceDelta}</span>
+                        <span className="tnum ml-1.5 text-xs text-fg/50">+₹{o.priceDelta}</span>
                       )}
                     </button>
                   );
@@ -138,7 +138,7 @@ export function DishSheet() {
         {/* Spice slider */}
         {dish.spicy && dish.spiceDefault >= 0 && (
           <fieldset className="mt-6">
-            <legend className="text-sm font-semibold text-ink">How much heat?</legend>
+            <legend className="text-sm font-semibold text-fg">How much heat?</legend>
             <input
               type="range"
               min={0}
@@ -150,20 +150,20 @@ export function DishSheet() {
               aria-label="Spice level"
             />
             <div className="mt-1.5 flex items-center justify-between">
-              <span className="text-xs text-ink/40">🌶</span>
+              <span className="text-xs text-fg/40">🌶</span>
               <span className="text-sm font-medium text-[color:var(--color-bandhani-ink)]">
                 {SPICE_LEVELS[Math.max(0, sel.spice)]}
               </span>
-              <span className="text-xs text-ink/40">🌶🌶🌶</span>
+              <span className="text-xs text-fg/40">🌶🌶🌶</span>
             </div>
           </fieldset>
         )}
       </div>
 
       {/* Sticky footer */}
-      <div className="fixed inset-x-0 bottom-0 z-10 mx-auto w-full max-w-lg border-t border-ink/10 bg-chalk px-5 py-3.5">
+      <div className="fixed inset-x-0 bottom-0 z-10 mx-auto w-full max-w-lg border-t border-line/10 bg-card px-5 py-3.5">
         <div className="flex items-center gap-3">
-          <div className="flex items-center rounded-xl border border-ink/15">
+          <div className="flex items-center rounded-xl border border-line/15">
             <button
               type="button"
               onClick={() => setQty((q) => Math.max(1, q - 1))}
@@ -172,7 +172,7 @@ export function DishSheet() {
             >
               −
             </button>
-            <span className="tnum w-6 text-center text-ink">{qty}</span>
+            <span className="tnum w-6 text-center text-fg">{qty}</span>
             <button
               type="button"
               onClick={() => setQty((q) => q + 1)}
@@ -185,13 +185,13 @@ export function DishSheet() {
           <button
             type="button"
             onClick={onAdd}
-            className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-bandhani px-5 py-3 font-semibold text-chalk shadow-pop transition active:scale-[0.98]"
+            className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-bandhani px-5 py-3 font-semibold text-fg shadow-pop transition active:scale-[0.98]"
           >
             <span>Add to cart</span>
             <span className="opacity-60">·</span>
             <PriceTicker value={total} />
             {unitMrp > unit && (
-              <span className="tnum text-xs text-chalk/60 line-through">{rupee(unitMrp * qty)}</span>
+              <span className="tnum text-xs text-fg/60 line-through">{rupee(unitMrp * qty)}</span>
             )}
           </button>
         </div>

@@ -117,7 +117,7 @@ export function ScratchCard({
         <button
           type="button"
           onClick={revealNow}
-          className="absolute bottom-2 right-3 text-[11px] font-medium text-ink/60 underline"
+          className="absolute bottom-2 right-3 text-[11px] font-medium text-fg/60 underline"
         >
           reveal
         </button>

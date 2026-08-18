@@ -40,16 +40,16 @@ export function PWARegister() {
           initial={{ y: 80, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 80, opacity: 0 }}
-          className="fixed inset-x-0 bottom-24 z-30 mx-auto flex w-full max-w-md items-center gap-3 rounded-2xl border border-steel/15 bg-ink-2 px-4 py-3 shadow-pop"
+          className="fixed inset-x-0 bottom-24 z-30 mx-auto flex w-full max-w-md items-center gap-3 rounded-2xl border border-line/15 bg-card px-4 py-3 shadow-pop"
           style={{ marginLeft: "auto", marginRight: "auto", left: 16, right: 16 }}
         >
           <img src="/icon.svg" alt="" width={36} height={36} className="rounded-lg" />
           <div className="min-w-0 flex-1">
-            <p className="text-sm font-semibold text-chalk">Install Dabba Never Comes</p>
-            <p className="text-xs text-steel-dim">Craving on tap. Still no food.</p>
+            <p className="text-sm font-semibold text-fg">Install Dabba Never Comes</p>
+            <p className="text-xs text-dim">Craving on tap. Still no food.</p>
           </div>
-          <button onClick={install} className="rounded-lg bg-bandhani px-3.5 py-1.5 text-sm font-semibold text-chalk">Install</button>
-          <button onClick={() => setDismissed(true)} className="text-steel-dim" aria-label="Dismiss">✕</button>
+          <button onClick={install} className="rounded-lg bg-bandhani px-3.5 py-1.5 text-sm font-semibold text-fg">Install</button>
+          <button onClick={() => setDismissed(true)} className="text-dim" aria-label="Dismiss">✕</button>
         </motion.div>
       )}
     </AnimatePresence>

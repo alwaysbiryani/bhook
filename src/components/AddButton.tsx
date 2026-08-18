@@ -22,7 +22,7 @@ export function AddButton({
       }}
       className={
         className ||
-        "absolute -bottom-3 left-1/2 -translate-x-1/2 rounded-lg border border-bandhani/40 bg-chalk px-6 py-1.5 text-sm font-bold uppercase tracking-wide text-bandhani shadow-pop transition active:scale-95"
+        "absolute -bottom-3 left-1/2 -translate-x-1/2 rounded-lg border border-bandhani/40 bg-card px-6 py-1.5 text-sm font-bold uppercase tracking-wide text-bandhani shadow-pop transition active:scale-95"
       }
     >
       {label}

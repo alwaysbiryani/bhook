@@ -30,9 +30,9 @@ export function NewsletterSignup() {
         onChange={(e) => setEmail(e.target.value)}
         placeholder="you@email.com (optional)"
         aria-label="Email for the newsletter"
-        className="tnum min-w-0 flex-1 rounded-lg border border-steel/15 bg-ink-2/60 px-3 py-2 text-sm text-chalk outline-none placeholder:text-steel-dim focus:border-bandhani"
+        className="tnum min-w-0 flex-1 rounded-lg border border-line/15 bg-card/60 px-3 py-2 text-sm text-fg outline-none placeholder:text-dim focus:border-bandhani"
       />
-      <button type="submit" className="rounded-lg border border-steel/20 px-3.5 py-2 text-sm font-semibold text-chalk hover:border-steel/40">
+      <button type="submit" className="rounded-lg border border-line/20 px-3.5 py-2 text-sm font-semibold text-fg hover:border-line/40">
         Notify me of nothing
       </button>
     </form>

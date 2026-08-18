@@ -13,26 +13,26 @@ export function DishRow({ dish, hue }: { dish: Dish; hue: number }) {
         <div className="mb-1.5 flex items-center gap-2">
           <VegMark diet={dish.diet} />
           {dish.bestseller && (
-            <span className="rounded bg-turmeric/15 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-turmeric">
+            <span className="rounded bg-turmeric/15 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-turmeric-text">
               ★ Bestseller
             </span>
           )}
         </div>
-        <h3 className="font-medium leading-tight text-chalk">
+        <h3 className="font-medium leading-tight text-fg">
           {dish.name}
           {dish.nameDeva && (
-            <span className="font-deva ml-2 text-sm text-steel-dim">{dish.nameDeva}</span>
+            <span className="font-deva ml-2 text-sm text-dim">{dish.nameDeva}</span>
           )}
         </h3>
         <div className="mt-1 flex items-center gap-2">
-          <span className="tnum font-semibold text-chalk">{rupee(dish.basePrice)}</span>
-          <span className="tnum text-sm text-steel-dim line-through">{rupee(dish.mrp)}</span>
-          {off > 0 && <span className="text-xs font-semibold text-turmeric">{off}% off</span>}
+          <span className="tnum font-semibold text-fg">{rupee(dish.basePrice)}</span>
+          <span className="tnum text-sm text-dim line-through">{rupee(dish.mrp)}</span>
+          {off > 0 && <span className="text-xs font-semibold text-turmeric-text">{off}% off</span>}
         </div>
-        <p className="mt-2 line-clamp-2 max-w-md text-sm leading-relaxed text-steel-dim">
+        <p className="mt-2 line-clamp-2 max-w-md text-sm leading-relaxed text-dim">
           {dish.description}
         </p>
-        <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-steel-dim">
+        <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-dim">
           <span className="tnum">{dish.prepMins} min</span>
           <span className="tnum">{dish.calories} kcal</span>
           {dish.spicy && dish.spiceDefault >= 0 && (
@@ -42,7 +42,7 @@ export function DishRow({ dish, hue }: { dish: Dish; hue: number }) {
       </div>
 
       <div className="relative w-28 shrink-0 sm:w-32">
-        <div className="aspect-square overflow-hidden rounded-xl border border-steel/10">
+        <div className="aspect-square overflow-hidden rounded-xl border border-line/10">
           <DishImage art={dish.art} hue={hue} seed={dish.slug} alt={dish.name} variant="thumb" className="h-full w-full" />
         </div>
         <AddButton dishSlug={dish.slug} />

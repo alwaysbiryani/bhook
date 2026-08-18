@@ -63,7 +63,7 @@ export function Sheet({
           transition={{ duration: 0.2 }}
         >
           <div
-            className="absolute inset-0 bg-ink/70 backdrop-blur-sm"
+            className="absolute inset-0 bg-page/70 backdrop-blur-sm"
             onClick={onClose}
             aria-hidden
           />
@@ -73,14 +73,14 @@ export function Sheet({
             aria-modal="true"
             aria-labelledby={labelledBy}
             tabIndex={-1}
-            className={`relative w-full ${maxWidth} max-h-[92vh] overflow-y-auto rounded-t-3xl bg-chalk text-ink shadow-sheet outline-none sm:rounded-3xl`}
+            className={`relative w-full ${maxWidth} max-h-[92vh] overflow-y-auto rounded-t-3xl bg-card text-fg shadow-sheet outline-none sm:rounded-3xl`}
             initial={reduce ? { opacity: 0 } : { y: "100%" }}
             animate={reduce ? { opacity: 1 } : { y: 0 }}
             exit={reduce ? { opacity: 0 } : { y: "100%" }}
             transition={reduce ? { duration: 0.15 } : { type: "spring", damping: 32, stiffness: 340 }}
           >
-            <div className="sticky top-0 z-10 flex justify-center bg-chalk pt-3 pb-1">
-              <span className="h-1.5 w-11 rounded-full bg-ink/15" />
+            <div className="sticky top-0 z-10 flex justify-center bg-card pt-3 pb-1">
+              <span className="h-1.5 w-11 rounded-full bg-page/15" />
             </div>
             {children}
           </motion.div>

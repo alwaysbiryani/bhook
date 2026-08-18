@@ -9,7 +9,7 @@ export function SearchTrigger() {
     <button
       type="button"
       onClick={openSearch}
-      className="mt-6 flex w-full max-w-lg items-center gap-2 rounded-xl border border-steel/15 bg-ink-2/60 px-4 py-3 text-left text-steel-dim hover:border-steel/30"
+      className="mt-6 flex w-full max-w-lg items-center gap-2 rounded-xl border border-line/15 bg-card/60 px-4 py-3 text-left text-dim hover:border-line/30"
     >
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
         <circle cx="11" cy="11" r="7" />

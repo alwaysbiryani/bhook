@@ -10,9 +10,9 @@ export default function Offline() {
       <div className="h-32 w-32 opacity-90">
         <CartGraphic count={0} className="h-full w-full" />
       </div>
-      <h1 className="mt-6 font-display text-3xl text-chalk">You&rsquo;re offline.</h1>
-      <p className="mt-2 text-steel-dim">So is the dabba. Reconnect and it still won&rsquo;t come.</p>
-      <Link href="/" className="mt-8 rounded-xl bg-bandhani px-6 py-3 font-medium text-chalk">
+      <h1 className="mt-6 font-display text-3xl text-fg">You&rsquo;re offline.</h1>
+      <p className="mt-2 text-dim">So is the dabba. Reconnect and it still won&rsquo;t come.</p>
+      <Link href="/" className="mt-8 rounded-xl bg-bandhani px-6 py-3 font-medium text-fg">
         Try again
       </Link>
     </main>

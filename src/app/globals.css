@@ -5,7 +5,7 @@
  * ------------------------------------------------------------------ */
 
 @theme {
-  /* Brand palette */
+  /* Brand palette (constant across themes) */
   --color-ink: #0c1512;
   --color-ink-2: #101d18;
   --color-leaf: #1b4d3e;
@@ -22,9 +22,18 @@
   --color-nonveg: #9e2a2b;
   --color-egg: #c98a00;
 
-  /* Lighter accents for small text on the dark ground (AA-contrast safe) */
-  --color-veg-text: #43b880;
-  --color-bandhani-text: #ee759e;
+  /* Semantic, theme-aware surfaces/text (values set per theme in :root below) */
+  --color-page: var(--page);
+  --color-card: var(--card);
+  --color-card-2: var(--card-2);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-dim: var(--dim);
+  --color-line: var(--line);
+  /* accent text that must stay legible on either ground */
+  --color-bandhani-text: var(--bandhani-text);
+  --color-turmeric-text: var(--turmeric-text);
+  --color-veg-text: var(--veg-text);
 
   /* Fonts (wired in layout.tsx via next/font variables) */
   --font-display: var(--font-kalnia), Georgia, serif;
@@ -38,21 +47,63 @@
   --radius-lg: 18px;
   --radius-xl: 26px;
 
-  /* Soft, warm, ink-tinted shadows (never pure black) */
+  /* Soft, warm shadows */
   --shadow-sheet: 0 -8px 40px -12px rgba(0, 0, 0, 0.55);
-  --shadow-card: 0 2px 14px -8px rgba(12, 21, 18, 0.6);
-  --shadow-pop: 0 12px 40px -14px rgba(12, 21, 18, 0.7);
+  --shadow-card: 0 2px 14px -8px rgba(12, 21, 18, 0.5);
+  --shadow-pop: 0 12px 40px -14px rgba(12, 21, 18, 0.55);
+}
+
+/* ------------------------------------------------------------------ *
+ *  Theme palettes — dark is the first-class look; light is a full swap
+ * ------------------------------------------------------------------ */
+
+:root {
+  color-scheme: dark;
+  --page: #0c1512;
+  --card: #101d18;
+  --card-2: #16241d;
+  --fg: #faf8f3;
+  --muted: #cfd4cd;
+  --dim: #9aa39c;
+  --line: #dcdfda;
+  --bandhani-text: #ee759e;
+  --turmeric-text: #f5b301;
+  --veg-text: #43b880;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --page: #faf8f3;
+  --card: #ffffff;
+  --card-2: #f1eee6;
+  --fg: #14201b;
+  --muted: #48534d;
+  --dim: #6c746e;
+  --line: #14201b;
+  --bandhani-text: #b7245a;
+  --turmeric-text: #8f6200;
+  --veg-text: #196b42;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    color-scheme: light;
+    --page: #faf8f3;
+    --card: #ffffff;
+    --card-2: #f1eee6;
+    --fg: #14201b;
+    --muted: #48534d;
+    --dim: #6c746e;
+    --line: #14201b;
+    --bandhani-text: #b7245a;
+    --turmeric-text: #8f6200;
+    --veg-text: #196b42;
+  }
 }
 
 /* ------------------------------------------------------------------ *
  *  Base
  * ------------------------------------------------------------------ */
-
-:root {
-  color-scheme: dark;
-  --page: var(--color-ink);
-  --text: var(--color-chalk);
-}
 
 html {
   height: 100%;
@@ -61,8 +112,8 @@ html {
 
 body {
   min-height: 100%;
-  background: var(--page);
-  color: var(--text);
+  background: var(--color-page);
+  color: var(--color-fg);
   font-family: var(--font-body);
   font-size: 1rem;
   line-height: 1.55;
@@ -93,10 +144,9 @@ body {
   border-radius: 4px;
 }
 
-/* Thin, steel scrollbars */
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--color-steel-dim) transparent;
+  scrollbar-color: var(--color-dim) transparent;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -28,12 +28,12 @@ export function PaySequence({ payee, onDone }: { payee: string; onDone: () => vo
   }, [reduce, onDone]);
 
   return (
-    <div className="fixed inset-0 z-[60] flex flex-col items-center justify-center bg-ink px-6 text-center">
+    <div className="fixed inset-0 z-[60] flex flex-col items-center justify-center bg-page px-6 text-center">
       {phase === "spin" ? (
         <>
-          <div className="h-16 w-16 animate-spin rounded-full border-[3px] border-steel/20 border-t-bandhani" />
-          <p className="mt-6 text-steel">Paying <span className="tnum text-chalk">₹0</span>…</p>
-          <p className="mt-1 text-xs text-steel-dim">Securely doing absolutely nothing</p>
+          <div className="h-16 w-16 animate-spin rounded-full border-[3px] border-line/20 border-t-bandhani" />
+          <p className="mt-6 text-muted">Paying <span className="tnum text-fg">₹0</span>…</p>
+          <p className="mt-1 text-xs text-dim">Securely doing absolutely nothing</p>
         </>
       ) : (
         <motion.div
@@ -62,7 +62,7 @@ export function PaySequence({ payee, onDone }: { payee: string; onDone: () => vo
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.55 }}
-            className="mt-6 font-display text-3xl text-chalk"
+            className="mt-6 font-display text-3xl text-fg"
           >
             <span className="tnum text-veg">₹0</span> paid
           </motion.p>
@@ -70,7 +70,7 @@ export function PaySequence({ payee, onDone }: { payee: string; onDone: () => vo
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.75 }}
-            className="mt-1 text-steel"
+            className="mt-1 text-muted"
           >
             to {payee}
           </motion.p>

@@ -72,9 +72,9 @@ export default function TrackPage() {
       <>
         <SiteHeader />
         <main className="mx-auto flex w-full max-w-md flex-1 flex-col items-center justify-center px-6 py-24 text-center">
-          <h1 className="font-display text-3xl text-chalk">This order also never came.</h1>
-          <p className="mt-2 text-steel-dim">We couldn&rsquo;t find it. Which is thematically consistent.</p>
-          <Link href="/" className="mt-8 rounded-xl bg-bandhani px-6 py-3 font-medium text-chalk">Back home</Link>
+          <h1 className="font-display text-3xl text-fg">This order also never came.</h1>
+          <p className="mt-2 text-dim">We couldn&rsquo;t find it. Which is thematically consistent.</p>
+          <Link href="/" className="mt-8 rounded-xl bg-bandhani px-6 py-3 font-medium text-fg">Back home</Link>
         </main>
       </>
     );
@@ -90,7 +90,7 @@ export default function TrackPage() {
       <SiteHeader cityName={restaurant.area} />
       <main className="mx-auto w-full max-w-md flex-1 px-5 py-5">
         {/* Map */}
-        <div className="overflow-hidden rounded-2xl border border-steel/10">
+        <div className="overflow-hidden rounded-2xl border border-line/10">
           <TrackMap progress={progress} riderHue={rider.avatarHue} className="h-56 w-full" />
         </div>
 
@@ -101,8 +101,8 @@ export default function TrackPage() {
               <h1 className="font-display text-2xl text-veg">Delivered ✓</h1>
             ) : (
               <>
-                <p className="text-xs uppercase tracking-wider text-steel-dim">{STEPS[stepIndex]}</p>
-                <h1 className="font-display text-2xl text-chalk">
+                <p className="text-xs uppercase tracking-wider text-dim">{STEPS[stepIndex]}</p>
+                <h1 className="font-display text-2xl text-fg">
                   Arriving in <span className="tnum text-bandhani">{mmss(remaining)}</span>
                 </h1>
               </>
@@ -110,10 +110,10 @@ export default function TrackPage() {
           </div>
           {!delivered && (
             <div className="text-right">
-              <p className="text-xs text-steel-dim">Your OTP</p>
+              <p className="text-xs text-dim">Your OTP</p>
               <div className="mt-1 flex gap-1">
                 {order.otp.split("").map((d, i) => (
-                  <span key={i} className="tnum grid h-8 w-7 place-items-center rounded-md bg-ink-2 text-lg font-bold text-turmeric">
+                  <span key={i} className="tnum grid h-8 w-7 place-items-center rounded-md bg-card text-lg font-bold text-turmeric-text">
                     {d}
                   </span>
                 ))}
@@ -132,18 +132,18 @@ export default function TrackPage() {
         )}
 
         {/* Rider card */}
-        <div className="mt-4 flex items-center gap-3 rounded-2xl border border-steel/10 bg-ink-2/60 p-3.5">
-          <div className="grid h-12 w-12 shrink-0 place-items-center rounded-full text-lg font-bold text-ink" style={{ background: `hsl(${rider.avatarHue} 60% 60%)` }}>
+        <div className="mt-4 flex items-center gap-3 rounded-2xl border border-line/10 bg-card/60 p-3.5">
+          <div className="grid h-12 w-12 shrink-0 place-items-center rounded-full text-lg font-bold text-fg" style={{ background: `hsl(${rider.avatarHue} 60% 60%)` }}>
             {rider.name[0]}
           </div>
           <div className="min-w-0 flex-1">
-            <p className="font-semibold text-chalk">{rider.name}</p>
-            <p className="text-xs text-steel-dim">
+            <p className="font-semibold text-fg">{rider.name}</p>
+            <p className="text-xs text-dim">
               <span className="tnum">{rider.rating}</span> ★ · {rider.vehicle}
             </p>
           </div>
           <div className="flex gap-2">
-            <button className="grid h-9 w-9 place-items-center rounded-full border border-steel/20 text-steel" aria-label="Call rider" onClick={() => play("pop")}>
+            <button className="grid h-9 w-9 place-items-center rounded-full border border-line/20 text-muted" aria-label="Call rider" onClick={() => play("pop")}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z" /></svg>
             </button>
           </div>
@@ -163,9 +163,9 @@ export default function TrackPage() {
                 initial={{ opacity: 0, y: 10, scale: 0.96 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ type: "spring", damping: 22, stiffness: 300 }}
-                className="max-w-[80%] rounded-2xl rounded-tl-sm bg-ink-2 px-3.5 py-2 text-sm text-chalk"
+                className="max-w-[80%] rounded-2xl rounded-tl-sm bg-card px-3.5 py-2 text-sm text-fg"
               >
-                <span className="mb-0.5 block text-[11px] text-steel-dim">{rider.name}</span>
+                <span className="mb-0.5 block text-[11px] text-dim">{rider.name}</span>
                 {p.text}
               </motion.div>
             ))}
@@ -175,15 +175,15 @@ export default function TrackPage() {
         {/* Delivered actions */}
         {delivered && (
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="mt-6">
-            <div className="rounded-2xl border border-steel/10 bg-ink-2/60 p-4 text-center">
-              <p className="text-steel">
-                Your food from <span className="text-chalk">{restaurant.name}</span> was &ldquo;delivered&rdquo;.
+            <div className="rounded-2xl border border-line/10 bg-card/60 p-4 text-center">
+              <p className="text-muted">
+                Your food from <span className="text-fg">{restaurant.name}</span> was &ldquo;delivered&rdquo;.
               </p>
-              <p className="mt-1 text-sm text-steel-dim">It has quietly moved to your order history. The photo is empty. So is the box.</p>
+              <p className="mt-1 text-sm text-dim">It has quietly moved to your order history. The photo is empty. So is the box.</p>
 
               {/* rate rider */}
               <div className="mt-4">
-                <p className="text-sm text-steel">Rate {rider.name}</p>
+                <p className="text-sm text-muted">Rate {rider.name}</p>
                 <div className="mt-1.5 flex justify-center gap-1">
                   {[1, 2, 3, 4, 5].map((n) => (
                     <button key={n} onClick={() => { setRated(n); play("pop"); }} aria-label={`${n} stars`}>
@@ -193,15 +193,15 @@ export default function TrackPage() {
                     </button>
                   ))}
                 </div>
-                {rated > 0 && <p className="mt-1 text-xs text-turmeric">Thanks. It changes nothing, but thanks.</p>}
+                {rated > 0 && <p className="mt-1 text-xs text-turmeric-text">Thanks. It changes nothing, but thanks.</p>}
               </div>
             </div>
 
             <div className="mt-4 grid grid-cols-2 gap-3">
-              <button onClick={reorder} className="rounded-xl bg-bandhani px-4 py-3.5 font-semibold text-chalk shadow-pop transition active:scale-[0.98]">
+              <button onClick={reorder} className="rounded-xl bg-bandhani px-4 py-3.5 font-semibold text-fg shadow-pop transition active:scale-[0.98]">
                 Reorder
               </button>
-              <Link href="/orders" className="grid place-items-center rounded-xl border border-steel/20 px-4 py-3.5 font-semibold text-chalk">
+              <Link href="/orders" className="grid place-items-center rounded-xl border border-line/20 px-4 py-3.5 font-semibold text-fg">
                 Your orders
               </Link>
             </div>
