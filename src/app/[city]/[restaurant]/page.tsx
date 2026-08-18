@@ -6,14 +6,15 @@ import { Footer } from "@/components/layout/Footer";
 import { MenuList } from "@/components/MenuList";
 import { StarRating } from "@/components/ui/StarRating";
 import {
-  restaurants,
+  realRestaurants,
   getRestaurant,
   getCity,
   dishesOfRestaurant,
 } from "@/data";
 
+// Prerender the real, iconic restaurants; fictional cloud kitchens render on demand.
 export function generateStaticParams() {
-  return restaurants.map((r) => ({ city: r.citySlug, restaurant: r.slug }));
+  return realRestaurants.map((r) => ({ city: r.citySlug, restaurant: r.slug }));
 }
 
 export async function generateMetadata({

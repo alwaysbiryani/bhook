@@ -3,7 +3,8 @@ import type { Metadata } from "next";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { Footer } from "@/components/layout/Footer";
 import { CityRestaurants, type CityItem } from "@/components/CityRestaurants";
-import { cities, getCity, restaurantsInCity, dishesOfRestaurant } from "@/data";
+import { RestaurantCard } from "@/components/RestaurantCard";
+import { cities, getCity, restaurantsInCity, dishesOfRestaurant, topRatedInCity } from "@/data";
 
 export function generateStaticParams() {
   return cities.map((c) => ({ city: c.slug }));
@@ -32,6 +33,7 @@ export default async function CityPage({
   const c = getCity(city);
   if (!c) notFound();
   const restaurants = restaurantsInCity(c.slug);
+  const topRated = topRatedInCity(c.slug);
 
   const items: CityItem[] = restaurants.map((r) => {
     const ds = dishesOfRestaurant(r.slug);
@@ -59,7 +61,20 @@ export default async function CityPage({
             The city&rsquo;s legends, from {c.state}. Fill your cart, watch the bill climb, pay nothing.
           </p>
         </section>
+        {/* Top rated rail */}
+        <section className="mx-auto w-full max-w-5xl px-5 py-4">
+          <h2 className="mb-3 font-display text-2xl text-chalk">Top rated in {c.name}</h2>
+          <div className="no-scrollbar -mx-5 flex gap-4 overflow-x-auto px-5 pb-2">
+            {topRated.map((r) => (
+              <div key={r.slug} className="w-64 shrink-0">
+                <RestaurantCard r={r} />
+              </div>
+            ))}
+          </div>
+        </section>
+
         <section className="mx-auto w-full max-w-5xl px-5 py-6">
+          <h2 className="mb-4 font-display text-2xl text-chalk">All {restaurants.length} places</h2>
           <CityRestaurants items={items} />
         </section>
       </main>

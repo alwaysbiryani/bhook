@@ -33,8 +33,8 @@ export function Footer() {
         </div>
 
         <p className="mt-6 max-w-2xl text-xs leading-relaxed text-steel-dim">
-          {BRAND.disclaimer} Restaurant names are used descriptively and factually — no logos, no
-          brand colours, no implied partnership.
+          {BRAND.disclaimer} Iconic restaurants are named descriptively and factually — no logos, no
+          brand colours, no implied partnership. Other listings are fictional cloud kitchens.
         </p>
       </div>
     </footer>

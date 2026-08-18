@@ -1,6 +1,6 @@
-import type { Restaurant } from "./schema";
+import type { RestaurantInput } from "./schema";
 
-export const RESTAURANTS: Restaurant[] = [
+export const RESTAURANTS: RestaurantInput[] = [
   /* ----------------------------- Hyderabad ----------------------------- */
   {
     slug: "paradise",

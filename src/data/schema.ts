@@ -59,8 +59,11 @@ export const RestaurantSchema = z.object({
   /** Hue (deg) that seeds this restaurant's illustrated art. */
   hue: z.number().int(),
   bestFor: z.string().optional(), // "Biryani", "Haleem"
+  /** True for generated "cloud kitchen" filler (not a real establishment). */
+  fictional: z.boolean().default(false),
 });
 export type Restaurant = z.infer<typeof RestaurantSchema>;
+export type RestaurantInput = z.input<typeof RestaurantSchema>;
 
 /* ------------------------------------------------------------------ *
  *  Customisation

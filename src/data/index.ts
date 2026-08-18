@@ -3,6 +3,7 @@ import { CITIES } from "./cities";
 import { RESTAURANTS } from "./restaurants";
 import { DISHES } from "./dishes";
 import { COUPONS_RAW } from "./coupons";
+import { buildFiller } from "./filler";
 import {
   validateAll,
   CouponSchema,
@@ -14,13 +15,27 @@ import {
 
 /**
  * Validate the whole dataset once, at module load (i.e. build time for static
- * pages). A bad reference or an MRP below base price fails the build.
+ * pages). A bad reference or an MRP below base price fails the build. Real,
+ * web-verified restaurants are topped up per city with fictional cloud kitchens
+ * (see filler.ts) so each city feels full.
  */
-const validated = validateAll({ cities: CITIES, restaurants: RESTAURANTS, dishes: DISHES });
+const filler = buildFiller(CITIES, RESTAURANTS, 50);
+const validated = validateAll({
+  cities: CITIES,
+  restaurants: [...RESTAURANTS, ...filler.restaurants],
+  dishes: [...DISHES, ...filler.dishes],
+});
 
 export const cities: City[] = validated.cities;
 export const restaurants: Restaurant[] = validated.restaurants;
 export const dishes: Dish[] = validated.dishes;
+
+/** Only the real, web-verified restaurants — used for static generation + sitemap. */
+export const realRestaurants: Restaurant[] = restaurants.filter((r) => !r.fictional);
+export const realDishes: Dish[] = dishes.filter((d) => {
+  const r = getRestaurant(d.restaurantSlug);
+  return r ? !r.fictional : true;
+});
 
 export const COUPONS: Coupon[] = z.array(CouponSchema).parse(COUPONS_RAW);
 
@@ -58,6 +73,13 @@ export function bestsellersInCity(citySlug: string, limit = 12): Dish[] {
   return dishes
     .filter((d) => d.citySlug === citySlug && d.bestseller)
     .slice(0, limit);
+}
+
+/** Top-rated restaurants in a city — the top `pct` by rating (min 4, max 12). */
+export function topRatedInCity(citySlug: string, pct = 0.2): Restaurant[] {
+  const all = restaurantsInCity(citySlug).slice().sort((a, b) => b.rating - a.rating);
+  const n = Math.min(12, Math.max(4, Math.round(all.length * pct)));
+  return all.slice(0, n);
 }
 
 /** Cuisines available in a city, most common first. */

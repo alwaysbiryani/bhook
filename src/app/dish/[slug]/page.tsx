@@ -6,13 +6,14 @@ import { Footer } from "@/components/layout/Footer";
 import { DishImage } from "@/components/DishImage";
 import { VegMark } from "@/components/ui/VegMark";
 import { AddButton } from "@/components/AddButton";
-import { dishes, getDish, getRestaurant, getCity } from "@/data";
+import { realDishes, getDish, getRestaurant, getCity } from "@/data";
 import { SPICE_LEVELS } from "@/data/options";
 import { rupee, pct } from "@/lib/format";
 import { BRAND } from "@/lib/brand";
 
+// Prerender real dishes; fictional cloud-kitchen dishes render on demand.
 export function generateStaticParams() {
-  return dishes.map((d) => ({ slug: d.slug }));
+  return realDishes.map((d) => ({ slug: d.slug }));
 }
 
 export async function generateMetadata({

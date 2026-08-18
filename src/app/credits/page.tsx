@@ -18,9 +18,11 @@ export default function Credits() {
             any restaurant, aggregator, or search engine.
           </p>
           <p>
-            Restaurant names are used descriptively and factually to identify well-known, real
+            The iconic restaurants are named descriptively and factually to identify well-known, real
             establishments. No logos, brand colours, or trademarks are reproduced, and no affiliation or
-            partnership is implied or exists.
+            partnership is implied or exists. Every other listing — the &ldquo;cloud kitchens&rdquo; that
+            fill out each city — is entirely fictional: invented names, invented menus, invented reviews.
+            Any resemblance to a real business is coincidental.
           </p>
           <h2 className="pt-4 font-display text-xl text-chalk">Type</h2>
           <p className="text-sm text-steel-dim">

@@ -36,6 +36,11 @@ export function RestaurantCard({ r, priority = false }: { r: Restaurant; priorit
         <span className="absolute bottom-2.5 left-3 rounded-md bg-turmeric px-2 py-0.5 text-[11px] font-bold text-ink">
           {r.prepMins}–{r.prepMins + 8} min
         </span>
+        {r.fictional && (
+          <span className="absolute right-3 top-3 rounded-md bg-ink/70 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-steel backdrop-blur-sm">
+            Cloud kitchen
+          </span>
+        )}
       </div>
       <div className="p-3.5">
         <div className="flex items-start justify-between gap-2">

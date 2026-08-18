@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { cities, restaurants, dishes } from "@/data";
+import { cities, realRestaurants as restaurants, realDishes as dishes } from "@/data";
 
 const BASE = "https://dabbanevercomes.app";
 
