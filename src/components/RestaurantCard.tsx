@@ -17,7 +17,7 @@ function cardArt(r: Restaurant): ArtKind {
   return "curry";
 }
 
-export function RestaurantCard({ r }: { r: Restaurant }) {
+export function RestaurantCard({ r, priority = false }: { r: Restaurant; priority?: boolean }) {
   return (
     <Link
       href={`/${r.citySlug}/${r.slug}`}
@@ -28,6 +28,7 @@ export function RestaurantCard({ r }: { r: Restaurant }) {
           art={cardArt(r)}
           hue={r.hue}
           seed={r.slug}
+          priority={priority}
           alt={`${r.name} — illustrated`}
           className="h-full w-full transition duration-500 group-hover:scale-105"
         />

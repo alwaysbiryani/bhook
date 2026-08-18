@@ -8,7 +8,7 @@ import { SPICE_LEVELS } from "@/data/options";
 export function DishRow({ dish, hue }: { dish: Dish; hue: number }) {
   const off = pct(dish.basePrice, dish.mrp);
   return (
-    <article className="flex gap-4 py-5">
+    <article className="dish-row flex gap-4 py-5" data-diet={dish.diet}>
       <div className="min-w-0 flex-1">
         <div className="mb-1.5 flex items-center gap-2">
           <VegMark diet={dish.diet} />
@@ -36,14 +36,14 @@ export function DishRow({ dish, hue }: { dish: Dish; hue: number }) {
           <span className="tnum">{dish.prepMins} min</span>
           <span className="tnum">{dish.calories} kcal</span>
           {dish.spicy && dish.spiceDefault >= 0 && (
-            <span className="text-bandhani/80">🌶 {SPICE_LEVELS[dish.spiceDefault]}</span>
+            <span className="text-[color:var(--color-bandhani-text)]">🌶 {SPICE_LEVELS[dish.spiceDefault]}</span>
           )}
         </div>
       </div>
 
       <div className="relative w-28 shrink-0 sm:w-32">
         <div className="aspect-square overflow-hidden rounded-xl border border-steel/10">
-          <DishImage art={dish.art} hue={hue} seed={dish.slug} alt={dish.name} className="h-full w-full" />
+          <DishImage art={dish.art} hue={hue} seed={dish.slug} alt={dish.name} variant="thumb" className="h-full w-full" />
         </div>
         <AddButton dishSlug={dish.slug} />
       </div>

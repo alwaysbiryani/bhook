@@ -1,24 +1,31 @@
 import type { Metadata, Viewport } from "next";
 import { Kalnia, Onest, Geist_Mono, Tiro_Devanagari_Hindi } from "next/font/google";
 import "./globals.css";
-import { AppChrome } from "@/components/AppChrome";
+import { AppChromeLazy } from "@/components/AppChromeLazy";
 
 const kalnia = Kalnia({
   variable: "--font-kalnia",
   subsets: ["latin"],
   display: "swap",
+  // Display text only ever uses weight 400 — ship one static instance, not the
+  // full variable file, so the hero font arrives sooner (and stays on-brand).
+  weight: "400",
 });
 
 const onest = Onest({
   variable: "--font-onest",
   subsets: ["latin"],
   display: "swap",
+  // Body text isn't the LCP — don't let it compete with the hero font for the
+  // preload budget on a throttled connection.
+  preload: false,
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
   display: "swap",
+  preload: false,
 });
 
 const tiroDeva = Tiro_Devanagari_Hindi({
@@ -26,6 +33,8 @@ const tiroDeva = Tiro_Devanagari_Hindi({
   subsets: ["devanagari", "latin"],
   weight: "400",
   display: "swap",
+  // Devanagari is secondary text — don't block the critical path preloading it.
+  preload: false,
 });
 
 const SITE = "Dabba Never Comes";
@@ -63,7 +72,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <body className="min-h-full flex flex-col">
         {children}
-        <AppChrome />
+        <AppChromeLazy />
       </body>
     </html>
   );

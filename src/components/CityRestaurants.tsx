@@ -80,8 +80,8 @@ export function CityRestaurants({ items }: { items: CityItem[] }) {
         </p>
       ) : (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {shown.map(({ r }) => (
-            <RestaurantCard key={r.slug} r={r} />
+          {shown.map(({ r }, i) => (
+            <RestaurantCard key={r.slug} r={r} priority={i < 3} />
           ))}
         </div>
       )}

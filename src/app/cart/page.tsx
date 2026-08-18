@@ -97,7 +97,7 @@ export default function CartPage() {
           {hydrated.map(({ line, dish, restaurant: r, unit, lineTotal, summary }) => (
             <div key={line.key} className="flex gap-3 border-b border-steel/10 p-4 last:border-0">
               <div className="h-16 w-16 shrink-0 overflow-hidden rounded-lg border border-steel/10">
-                <DishImage art={dish.art} hue={r.hue} seed={dish.slug} alt={dish.name} className="h-full w-full" />
+                <DishImage art={dish.art} hue={r.hue} seed={dish.slug} alt={dish.name} variant="thumb" className="h-full w-full" />
               </div>
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-1.5">

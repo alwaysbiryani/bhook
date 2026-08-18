@@ -33,7 +33,7 @@ export function SiteHeader({ cityName }: { cityName?: string }) {
           type="button"
           onClick={openCity}
           className="flex items-center gap-1.5 text-sm text-steel hover:text-chalk"
-          aria-label="Change city"
+          aria-label={`${label}, change city`}
         >
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
             <path d="M12 21s-7-6.2-7-11a7 7 0 1 1 14 0c0 4.8-7 11-7 11z" />

@@ -89,7 +89,7 @@ export function SearchOverlay() {
                       className="flex w-full items-center gap-3 rounded-xl px-2 py-2 text-left hover:bg-ink/5"
                     >
                       <div className="h-11 w-11 shrink-0 overflow-hidden rounded-lg">
-                        <DishImage art="thali" hue={r.hue} seed={r.slug} alt={r.name} className="h-full w-full" />
+                        <DishImage art="thali" hue={r.hue} seed={r.slug} alt={r.name} variant="thumb" className="h-full w-full" />
                       </div>
                       <div className="min-w-0">
                         <p className="truncate text-sm font-medium text-ink">{r.name}</p>
@@ -113,7 +113,7 @@ export function SearchOverlay() {
                         className="flex w-full items-center gap-3 rounded-xl px-2 py-2 text-left hover:bg-ink/5"
                       >
                         <div className="h-11 w-11 shrink-0 overflow-hidden rounded-lg">
-                          <DishImage art={d.art} hue={r.hue} seed={d.slug} alt={d.name} className="h-full w-full" />
+                          <DishImage art={d.art} hue={r.hue} seed={d.slug} alt={d.name} variant="thumb" className="h-full w-full" />
                         </div>
                         <div className="min-w-0 flex-1">
                           <div className="flex items-center gap-1.5">

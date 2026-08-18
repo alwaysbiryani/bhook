@@ -22,6 +22,10 @@
   --color-nonveg: #9e2a2b;
   --color-egg: #c98a00;
 
+  /* Lighter accents for small text on the dark ground (AA-contrast safe) */
+  --color-veg-text: #43b880;
+  --color-bandhani-text: #ee759e;
+
   /* Fonts (wired in layout.tsx via next/font variables) */
   --font-display: var(--font-kalnia), Georgia, serif;
   --font-deva: var(--font-tiro-deva), var(--font-body), sans-serif;
@@ -113,4 +117,17 @@ body {
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* CSS-only "Veg only" menu filter — toggled by VegToggle on #menu-root, so the
+   dish list needs no client-side hydration to filter. */
+#menu-root.veg-only .dish-row[data-diet="nonveg"],
+#menu-root.veg-only .dish-row[data-diet="egg"] {
+  display: none;
+}
+#menu-root.veg-only .menu-section:not(:has(.dish-row[data-diet="veg"])) {
+  display: none;
+}
+#menu-root.veg-only:not(:has(.dish-row[data-diet="veg"])) .veg-empty {
+  display: block;
 }

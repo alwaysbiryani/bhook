@@ -70,7 +70,7 @@ export default async function DishPage({ params }: { params: Promise<{ slug: str
 
         <div className="overflow-hidden rounded-2xl border border-steel/10">
           <div className="aspect-[16/9] w-full">
-            <DishImage art={d.art} hue={r.hue} seed={d.slug} alt={d.name} className="h-full w-full" />
+            <DishImage art={d.art} hue={r.hue} seed={d.slug} alt={d.name} priority className="h-full w-full" />
           </div>
         </div>
 
@@ -84,7 +84,7 @@ export default async function DishPage({ params }: { params: Promise<{ slug: str
           {d.name}
           {d.nameDeva && <span className="font-deva ml-3 text-2xl text-steel-dim">{d.nameDeva}</span>}
         </h1>
-        <Link href={`/${c.slug}/${r.slug}`} className="mt-1 inline-block text-sm text-bandhani hover:underline">
+        <Link href={`/${c.slug}/${r.slug}`} className="mt-1 inline-block text-sm text-[color:var(--color-bandhani-text)] hover:underline">
           {r.name} · {r.area}, {c.name}
         </Link>
 
@@ -99,7 +99,7 @@ export default async function DishPage({ params }: { params: Promise<{ slug: str
         <div className="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-sm text-steel-dim">
           <span className="tnum">{d.prepMins} min · never</span>
           <span className="tnum">{d.calories} kcal (imaginary)</span>
-          {d.spicy && d.spiceDefault >= 0 && <span className="text-bandhani/80">🌶 {SPICE_LEVELS[d.spiceDefault]}</span>}
+          {d.spicy && d.spiceDefault >= 0 && <span className="text-[color:var(--color-bandhani-text)]">🌶 {SPICE_LEVELS[d.spiceDefault]}</span>}
           {d.jainPossible && <span className="text-veg">Jain possible</span>}
         </div>
 

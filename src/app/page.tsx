@@ -97,8 +97,8 @@ export default function Home() {
             </Link>
           </div>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {restaurants.map((r) => (
-              <RestaurantCard key={r.slug} r={r} />
+            {restaurants.map((r, i) => (
+              <RestaurantCard key={r.slug} r={r} priority={i < 3} />
             ))}
           </div>
         </section>
