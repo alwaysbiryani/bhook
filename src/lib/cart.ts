@@ -1,6 +1,6 @@
 import type { CartLine } from "@/store/useStore";
 import type { Dish, Restaurant } from "@/data/schema";
-import { getDish, getRestaurant } from "@/data";
+import { catalogueNow } from "@/lib/catalogue";
 import {
   computeUnitPrice,
   computeUnitMrp,
@@ -19,9 +19,12 @@ export interface HydratedLine {
 }
 
 export function hydrateLine(line: CartLine): HydratedLine | null {
-  const dish = getDish(line.dishSlug);
+  // Reads the full catalogue only if it's already loaded. The cart UI subscribes
+  // via `useCatalogue`, so it re-renders (and prices resolve) once it arrives.
+  const catalogue = catalogueNow();
+  const dish = catalogue?.getDish(line.dishSlug);
   if (!dish) return null;
-  const restaurant = getRestaurant(dish.restaurantSlug);
+  const restaurant = catalogue?.getRestaurant(dish.restaurantSlug);
   if (!restaurant) return null;
   const unit = computeUnitPrice(dish, line.selection);
   const unitMrp = computeUnitMrp(dish, line.selection);

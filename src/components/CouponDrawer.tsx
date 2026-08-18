@@ -5,8 +5,9 @@ import { Sheet } from "@/components/sheet/Sheet";
 import { PriceTicker } from "@/components/PriceTicker";
 import { useUI } from "@/store/useUI";
 import { useStore } from "@/store/useStore";
-import { COUPONS } from "@/data";
+import { COUPONS } from "@/data/client";
 import { computeBill, resolveCoupon, couponAmount } from "@/lib/bill";
+import { useCatalogue } from "@/lib/catalogue";
 import { play } from "@/lib/sound";
 
 export function CouponDrawer() {
@@ -18,6 +19,7 @@ export function CouponDrawer() {
   const removeCoupon = useStore((s) => s.removeCoupon);
   const [code, setCode] = useState("");
 
+  useCatalogue(lines.length > 0);
   const bill = computeBill(lines, applied);
   const itemTotal = bill.itemTotal;
 

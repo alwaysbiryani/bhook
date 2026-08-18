@@ -7,7 +7,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { TrackMap } from "@/components/track/TrackMap";
 import { useStore } from "@/store/useStore";
-import { getRestaurant, RIDERS, RIDER_PINGS } from "@/data";
+import { useCatalogue } from "@/lib/catalogue";
+import { RIDERS, RIDER_PINGS } from "@/data/riders";
 import { play } from "@/lib/sound";
 
 const DURATION = 48_000; // ms — the whole "delivery"
@@ -62,8 +63,9 @@ export default function TrackPage() {
     }
   }, [order, delivered, rang, markDelivered]);
 
+  const catalogue = useCatalogue(!!order);
   const rider = order ? RIDERS.find((r) => r.id === order.riderId) : undefined;
-  const restaurant = order ? getRestaurant(order.restaurantSlug) : undefined;
+  const restaurant = catalogue && order ? catalogue.getRestaurant(order.restaurantSlug) : undefined;
   const shownPings = useMemo(() => PINGS.filter((p) => progress >= p.p), [progress]);
   const stepIndex = Math.min(STEPS.length - 1, Math.floor(progress * STEPS.length));
 

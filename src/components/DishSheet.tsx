@@ -7,7 +7,7 @@ import { VegMark } from "@/components/ui/VegMark";
 import { PriceTicker } from "@/components/PriceTicker";
 import { useUI } from "@/store/useUI";
 import { useStore } from "@/store/useStore";
-import { getDish, getRestaurant } from "@/data";
+import { useCatalogue } from "@/lib/catalogue";
 import { getOptionGroup, SPICE_LEVELS } from "@/data/options";
 import {
   defaultSelection,
@@ -24,25 +24,41 @@ export function DishSheet() {
   const pulseCart = useUI((s) => s.pulseCart);
   const addLine = useStore((s) => s.addLine);
 
-  const dish = dishSlug ? getDish(dishSlug) : undefined;
-  const restaurant = dish ? getRestaurant(dish.restaurantSlug) : undefined;
+  // The catalogue loads lazily on first interaction; while it's arriving `dish`
+  // is briefly undefined even though the sheet is open.
+  const catalogue = useCatalogue(!!dishSlug);
+  const dish = catalogue && dishSlug ? catalogue.getDish(dishSlug) : undefined;
+  const restaurant = catalogue && dish ? catalogue.getRestaurant(dish.restaurantSlug) : undefined;
 
-  const [sel, setSel] = useState<Selection>(() =>
-    dish ? defaultSelection(dish) : { choices: {}, spice: 0 },
-  );
+  const [sel, setSel] = useState<Selection>({ choices: {}, spice: 0 });
   const [qty, setQty] = useState(1);
 
-  // reset local state whenever a new dish opens
+  // reset local state whenever a new dish opens (or finishes loading)
   useEffect(() => {
     if (dish) {
       setSel(defaultSelection(dish));
       setQty(1);
     }
-  }, [dishSlug]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [dishSlug, dish]);
 
   const unit = useMemo(() => (dish ? computeUnitPrice(dish, sel) : 0), [dish, sel]);
   const unitMrp = useMemo(() => (dish ? computeUnitMrp(dish, sel) : 0), [dish, sel]);
   const total = unit * qty;
+
+  // Sheet is open but the catalogue is still loading — show a light skeleton.
+  if (dishSlug && (!dish || !restaurant)) {
+    return (
+      <Sheet open onClose={closeDish} labelledBy="dish-title">
+        <div className="px-5 pb-32 pt-4" aria-busy="true">
+          <h2 id="dish-title" className="sr-only">Loading dish</h2>
+          <div className="mx-auto mb-4 aspect-[16/9] w-full animate-pulse rounded-xl bg-card-2" />
+          <div className="h-6 w-2/3 animate-pulse rounded bg-card-2" />
+          <div className="mt-2 h-4 w-1/3 animate-pulse rounded bg-card-2" />
+          <div className="mt-4 h-16 w-full animate-pulse rounded bg-card-2" />
+        </div>
+      </Sheet>
+    );
+  }
 
   if (!dish || !restaurant) return <Sheet open={false} onClose={closeDish}>{null}</Sheet>;
 
@@ -161,13 +177,13 @@ export function DishSheet() {
       </div>
 
       {/* Sticky footer */}
-      <div className="fixed inset-x-0 bottom-0 z-10 mx-auto w-full max-w-lg border-t border-line/10 bg-card px-5 py-3.5">
+      <div className="fixed inset-x-0 bottom-0 z-10 mx-auto w-full max-w-lg border-t border-line/10 bg-card px-5 pt-3.5 pb-[calc(0.875rem+env(safe-area-inset-bottom))]">
         <div className="flex items-center gap-3">
           <div className="flex items-center rounded-xl border border-line/15">
             <button
               type="button"
               onClick={() => setQty((q) => Math.max(1, q - 1))}
-              className="px-3.5 py-2 text-lg text-bandhani"
+              className="inline-flex min-h-11 min-w-11 items-center justify-center text-lg text-bandhani transition active:scale-90 active:bg-bandhani/10"
               aria-label="Decrease quantity"
             >
               −
@@ -176,7 +192,7 @@ export function DishSheet() {
             <button
               type="button"
               onClick={() => setQty((q) => q + 1)}
-              className="px-3.5 py-2 text-lg text-bandhani"
+              className="inline-flex min-h-11 min-w-11 items-center justify-center text-lg text-bandhani transition active:scale-90 active:bg-bandhani/10"
               aria-label="Increase quantity"
             >
               +

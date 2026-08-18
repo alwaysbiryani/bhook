@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { Sheet } from "@/components/sheet/Sheet";
 import { useUI } from "@/store/useUI";
 import { useStore } from "@/store/useStore";
-import { cities } from "@/data";
+import { cities } from "@/data/client";
 
 export function CityPicker() {
   const open = useUI((s) => s.cityOpen);

@@ -6,7 +6,7 @@ import { Logo } from "@/components/Logo";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { useStore, selectCartCount } from "@/store/useStore";
 import { useUI } from "@/store/useUI";
-import { getCity } from "@/data";
+import { getCity } from "@/data/client";
 import { setMuted } from "@/lib/sound";
 
 export function SiteHeader({ cityName }: { cityName?: string }) {
@@ -24,34 +24,34 @@ export function SiteHeader({ cityName }: { cityName?: string }) {
   const label = mounted ? getCity(citySlug)?.name ?? cityName ?? "Hyderabad" : cityName ?? "Hyderabad";
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line/10 bg-page/85 backdrop-blur-md">
-      <div className="mx-auto flex w-full max-w-5xl items-center gap-3 px-5 py-3">
-        <Link href="/" aria-label="Dabba Never Comes — home">
+    <header className="safe-top sticky top-0 z-40 border-b border-line/10 bg-page/85 backdrop-blur-md">
+      <div className="safe-x mx-auto flex w-full max-w-5xl items-center gap-3 px-5 py-3">
+        <Link href="/" aria-label="Dabba Never Comes — home" className="shrink-0">
           <Logo className="text-xl" />
         </Link>
-        <span className="mx-1 h-5 w-px bg-steel/15" />
+        <span className="mx-1 h-5 w-px shrink-0 bg-steel/15" />
         <button
           type="button"
           onClick={openCity}
-          className="flex items-center gap-1.5 text-sm text-muted hover:text-fg"
+          className="flex min-h-11 min-w-0 items-center gap-1.5 text-sm text-muted hover:text-fg"
           aria-label={`${label}, change city`}
         >
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="shrink-0" aria-hidden>
             <path d="M12 21s-7-6.2-7-11a7 7 0 1 1 14 0c0 4.8-7 11-7 11z" />
             <circle cx="12" cy="10" r="2.5" />
           </svg>
-          <span className="font-medium text-fg">{label}</span>
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
+          <span className="truncate font-medium text-fg">{label}</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="shrink-0" aria-hidden>
             <path d="M6 9l6 6 6-6" />
           </svg>
         </button>
 
-        <div className="ml-auto flex items-center gap-2 sm:gap-3">
+        <div className="ml-auto flex shrink-0 items-center gap-1 sm:gap-3">
           <button
             type="button"
             onClick={openSearch}
             aria-label="Search"
-            className="rounded-lg p-1.5 text-muted hover:text-fg"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg text-muted hover:text-fg"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
               <circle cx="11" cy="11" r="7" />
@@ -63,7 +63,7 @@ export function SiteHeader({ cityName }: { cityName?: string }) {
             onClick={toggleSound}
             aria-label={soundOn ? "Mute sounds" : "Unmute sounds"}
             aria-pressed={!soundOn}
-            className="rounded-lg p-1.5 text-muted hover:text-fg"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg text-muted hover:text-fg"
             title={soundOn ? "Sound on" : "Sound off"}
           >
             {soundOn ? (

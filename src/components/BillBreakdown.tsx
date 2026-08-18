@@ -4,6 +4,7 @@ import { PriceTicker } from "@/components/PriceTicker";
 import { useStore } from "@/store/useStore";
 import { useUI } from "@/store/useUI";
 import { computeBill } from "@/lib/bill";
+import { useCatalogue } from "@/lib/catalogue";
 import { rupee } from "@/lib/format";
 
 function Row({
@@ -29,6 +30,7 @@ export function BillBreakdown({ showCouponButton = true }: { showCouponButton?: 
   const lines = useStore((s) => s.lines);
   const applied = useStore((s) => s.appliedCoupons);
   const openCoupon = useUI((s) => s.openCoupon);
+  useCatalogue(lines.length > 0);
   const bill = computeBill(lines, applied);
 
   if (bill.count === 0) return null;
