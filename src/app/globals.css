@@ -160,13 +160,37 @@ body {
   }
 }
 
-/* Hide scrollbar on horizontal rails while keeping scroll */
+/* Hide scrollbar on horizontal rails while keeping scroll. Contain the
+   overscroll so a rail fling never chains to the page (or triggers the
+   browser's back-swipe), and keep iOS momentum. */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ------------------------------------------------------------------ *
+ *  Safe-area insets — the layout sets viewportFit: "cover", so sticky
+ *  headers, fixed cart/sheets and full-screen surfaces must inset past
+ *  the notch and home indicator themselves. These ADD to, never replace,
+ *  the design padding: `safe-x` keeps the app's 1.25rem (px-5) gutter and
+ *  only grows it on notched devices; `safe-top`/`safe-bottom` are additive
+ *  and used on elements that carry no padding on that axis. No-ops on
+ *  non-notched devices.
+ * ------------------------------------------------------------------ */
+.safe-top {
+  padding-top: env(safe-area-inset-top);
+}
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.safe-x {
+  padding-left: max(1.25rem, env(safe-area-inset-left));
+  padding-right: max(1.25rem, env(safe-area-inset-right));
 }
 
 /* CSS-only "Veg only" menu filter — toggled by VegToggle on #menu-root, so the
