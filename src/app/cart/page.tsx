@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { Footer } from "@/components/layout/Footer";
-import { Thali } from "@/components/thali/Thali";
+import { CartGraphic } from "@/components/cart/CartGraphic";
 import { DishImage } from "@/components/DishImage";
 import { VegMark } from "@/components/ui/VegMark";
 import { BillBreakdown } from "@/components/BillBreakdown";
@@ -32,9 +32,9 @@ export default function CartPage() {
         <SiteHeader />
         <main className="mx-auto flex w-full max-w-md flex-1 flex-col items-center justify-center px-6 py-20 text-center">
           <div className="h-40 w-40 opacity-90">
-            <Thali filled={0} weight={0} className="h-full w-full" />
+            <CartGraphic count={0} className="h-full w-full" />
           </div>
-          <h1 className="mt-6 font-display text-3xl text-chalk">Thali khaali hai.</h1>
+          <h1 className="mt-6 font-display text-3xl text-chalk">Cart khaali hai.</h1>
           <p className="mt-2 text-steel-dim">Nothing added yet. Go stare at some biryani you won&rsquo;t receive.</p>
           <Link
             href="/"
@@ -52,13 +52,13 @@ export default function CartPage() {
     <>
       <SiteHeader />
       <main className="mx-auto w-full max-w-xl flex-1 px-5 py-6">
-        {/* Thali + restaurant */}
+        {/* Cart + restaurant */}
         <div className="flex items-center gap-4 rounded-2xl border border-steel/10 bg-ink-2/60 p-4">
           <div className="h-24 w-24 shrink-0">
-            <Thali filled={Math.min(7, hydrated.length)} weight={Math.min(1, count / 8)} className="h-full w-full" />
+            <CartGraphic count={count} className="h-full w-full" />
           </div>
           <div className="min-w-0">
-            <p className="text-xs uppercase tracking-wider text-steel-dim">Your thali from</p>
+            <p className="text-xs uppercase tracking-wider text-steel-dim">Your order from</p>
             <h1 className="truncate font-display text-2xl text-chalk">{restaurant?.name}</h1>
             <p className="text-sm text-steel-dim">
               {count} {count === 1 ? "item" : "items"} · {restaurant?.area}

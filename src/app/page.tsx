@@ -35,7 +35,7 @@ export default function Home() {
             <span className="text-bandhani">Skip the food.</span>
           </h1>
           <p className="mt-4 max-w-lg text-lg text-steel">
-            Real dishes from {city.name}&rsquo;s most iconic kitchens. Fill your thali, stack every
+            Real dishes from {city.name}&rsquo;s most iconic kitchens. Fill your cart, stack every
             coupon, pay <span className="tnum">₹0</span>, and track a rider who never quite arrives.
           </p>
 

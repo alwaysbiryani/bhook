@@ -84,7 +84,7 @@ export function SiteHeader({ cityName }: { cityName?: string }) {
             href="/cart"
             className="relative rounded-lg border border-steel/15 px-3 py-1.5 text-sm text-chalk hover:border-steel/30"
           >
-            Thali
+            Cart
             {mounted && count > 0 && (
               <span className="tnum absolute -right-2 -top-2 grid h-5 min-w-5 place-items-center rounded-full bg-bandhani px-1 text-[11px] font-bold text-chalk">
                 {count}

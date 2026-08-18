@@ -106,7 +106,7 @@ export default async function DishPage({ params }: { params: Promise<{ slug: str
         <div className="mt-6">
           <AddButton
             dishSlug={d.slug}
-            label="Add to thali"
+            label="Add to cart"
             className="flex w-full items-center justify-center gap-2 rounded-xl bg-bandhani px-5 py-4 text-lg font-semibold text-chalk shadow-pop transition active:scale-[0.99]"
           />
         </div>

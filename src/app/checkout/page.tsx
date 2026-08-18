@@ -83,7 +83,7 @@ export default function CheckoutPage() {
         <SiteHeader />
         <main className="mx-auto flex w-full max-w-md flex-1 flex-col items-center justify-center px-6 py-24 text-center">
           <h1 className="font-display text-3xl text-chalk">Nothing to pay for.</h1>
-          <p className="mt-2 text-steel-dim">Your thali is empty. Which is, admittedly, on brand.</p>
+          <p className="mt-2 text-steel-dim">Your cart is empty. Which is, admittedly, on brand.</p>
           <Link href="/" className="mt-8 rounded-xl bg-bandhani px-6 py-3 font-medium text-chalk">
             Browse restaurants
           </Link>

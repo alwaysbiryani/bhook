@@ -18,7 +18,7 @@ export default function About() {
             the payment, or the charge.
           </p>
           <p>
-            You browse real dishes from India&rsquo;s most iconic kitchens, fill a steel thali, watch the
+            You browse real dishes from India&rsquo;s most iconic kitchens, fill a cart, watch the
             bill climb, apply every coupon (they all work, they all stack), pay <span className="tnum">₹0</span>{" "}
             over UPI, scratch a card, and track a rider named Ramesh who is always <em>bahar</em> and never
             quite here.

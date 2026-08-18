@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { Footer } from "@/components/layout/Footer";
-import { Thali } from "@/components/thali/Thali";
+import { CartGraphic } from "@/components/cart/CartGraphic";
 import { useStore } from "@/store/useStore";
 import { inr, rupee } from "@/lib/format";
 
@@ -27,7 +27,7 @@ export default function OrdersPage() {
         <SiteHeader />
         <main className="mx-auto flex w-full max-w-md flex-1 flex-col items-center justify-center px-6 py-24 text-center">
           <div className="h-36 w-36 opacity-90">
-            <Thali filled={0} weight={0} className="h-full w-full" />
+            <CartGraphic count={0} className="h-full w-full" />
           </div>
           <h1 className="mt-6 font-display text-3xl text-chalk">No orders yet.</h1>
           <p className="mt-2 text-steel-dim">Nothing ordered, nothing delivered. Perfectly balanced.</p>

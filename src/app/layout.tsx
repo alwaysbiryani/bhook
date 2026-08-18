@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     template: `%s · ${SITE}`,
   },
   description:
-    "Browse real dishes from India's most iconic restaurants, fill your thali, stack every coupon, pay ₹0, and track a rider who never arrives. A parody. No real food, no real payment, no real charge.",
+    "Browse real dishes from India's most iconic restaurants, fill your cart, stack every coupon, pay ₹0, and track a rider who never arrives. A parody. No real food, no real payment, no real charge.",
   applicationName: SITE,
   appleWebApp: { capable: true, title: SITE, statusBarStyle: "black-translucent" },
   openGraph: { title: SITE, description: TAGLINE, siteName: SITE, type: "website" },

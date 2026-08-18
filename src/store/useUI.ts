@@ -8,8 +8,8 @@ interface UIState {
   cityOpen: boolean;
   couponOpen: boolean;
   searchOpen: boolean;
-  /** bumps each add-to-cart so the floating thali can pulse. */
-  thaliPulse: number;
+  /** bumps each add-to-cart so the floating cart can pulse. */
+  cartPulse: number;
 
   openDish: (slug: string) => void;
   closeDish: () => void;
@@ -21,7 +21,7 @@ interface UIState {
   closeCoupon: () => void;
   openSearch: () => void;
   closeSearch: () => void;
-  pulseThali: () => void;
+  pulseCart: () => void;
 }
 
 export const useUI = create<UIState>((set) => ({
@@ -30,7 +30,7 @@ export const useUI = create<UIState>((set) => ({
   cityOpen: false,
   couponOpen: false,
   searchOpen: false,
-  thaliPulse: 0,
+  cartPulse: 0,
 
   openDish: (slug) => set({ dishSlug: slug }),
   closeDish: () => set({ dishSlug: null }),
@@ -42,5 +42,5 @@ export const useUI = create<UIState>((set) => ({
   closeCoupon: () => set({ couponOpen: false }),
   openSearch: () => set({ searchOpen: true }),
   closeSearch: () => set({ searchOpen: false }),
-  pulseThali: () => set((s) => ({ thaliPulse: s.thaliPulse + 1 })),
+  pulseCart: () => set((s) => ({ cartPulse: s.cartPulse + 1 })),
 }));

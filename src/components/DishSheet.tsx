@@ -21,7 +21,7 @@ import { rupee } from "@/lib/format";
 export function DishSheet() {
   const dishSlug = useUI((s) => s.dishSlug);
   const closeDish = useUI((s) => s.closeDish);
-  const pulseThali = useUI((s) => s.pulseThali);
+  const pulseCart = useUI((s) => s.pulseCart);
   const addLine = useStore((s) => s.addLine);
 
   const dish = dishSlug ? getDish(dishSlug) : undefined;
@@ -60,7 +60,7 @@ export function DishSheet() {
     addLine(dish.slug, dish.restaurantSlug, sel, qty);
     play("pop");
     if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(12);
-    pulseThali();
+    pulseCart();
     closeDish();
   };
 
@@ -187,7 +187,7 @@ export function DishSheet() {
             onClick={onAdd}
             className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-bandhani px-5 py-3 font-semibold text-chalk shadow-pop transition active:scale-[0.98]"
           >
-            <span>Add to thali</span>
+            <span>Add to cart</span>
             <span className="opacity-60">·</span>
             <PriceTicker value={total} />
             {unitMrp > unit && (

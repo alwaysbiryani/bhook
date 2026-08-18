@@ -56,7 +56,7 @@ export default async function CityPage({
             {c.nameDeva && <span className="font-deva ml-3 text-2xl text-steel-dim">{c.nameDeva}</span>}
           </h1>
           <p className="mt-2 max-w-lg text-steel">
-            The city&rsquo;s legends, from {c.state}. Fill a thali, watch the bill climb, pay nothing.
+            The city&rsquo;s legends, from {c.state}. Fill your cart, watch the bill climb, pay nothing.
           </p>
         </section>
         <section className="mx-auto w-full max-w-5xl px-5 py-6">

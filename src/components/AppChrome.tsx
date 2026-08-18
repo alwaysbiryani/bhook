@@ -1,7 +1,7 @@
 "use client";
 
 import { DishSheet } from "@/components/DishSheet";
-import { FloatingThali } from "@/components/thali/FloatingThali";
+import { FloatingCart } from "@/components/cart/FloatingCart";
 import { CityPicker } from "@/components/CityPicker";
 import { AddressSheet } from "@/components/AddressSheet";
 import { CouponDrawer } from "@/components/CouponDrawer";
@@ -13,7 +13,7 @@ export function AppChrome() {
   return (
     <>
       <DishSheet />
-      <FloatingThali />
+      <FloatingCart />
       <CityPicker />
       <AddressSheet />
       <CouponDrawer />

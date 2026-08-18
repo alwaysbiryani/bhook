@@ -3,22 +3,20 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import { Thali } from "./Thali";
+import { CartGraphic } from "./CartGraphic";
 import { PriceTicker } from "@/components/PriceTicker";
 import { useStore } from "@/store/useStore";
 import { useUI } from "@/store/useUI";
 import { cartTotals } from "@/lib/cart";
 
-/** The persistent floating mini-thali. Appears when the cart has items, pulses on
- *  each add, and taps through to the full thali (/cart). Hidden on cart/checkout. */
-export function FloatingThali() {
+/** The persistent floating mini-cart. Appears when the cart has items, pulses on
+ *  each add, and taps through to the full cart (/cart). Hidden on cart/checkout. */
+export function FloatingCart() {
   const lines = useStore((s) => s.lines);
-  const pulse = useUI((s) => s.thaliPulse);
+  const pulse = useUI((s) => s.cartPulse);
   const pathname = usePathname();
 
-  const { itemTotal, count, hydrated } = cartTotals(lines);
-  const distinct = Math.min(7, hydrated.length);
-  const weight = Math.min(1, count / 8);
+  const { itemTotal, count } = cartTotals(lines);
 
   const hidden = count === 0 || pathname === "/cart" || pathname === "/checkout";
 
@@ -43,11 +41,11 @@ export function FloatingThali() {
               transition={{ type: "spring", damping: 10, stiffness: 400 }}
               className="h-12 w-12 shrink-0"
             >
-              <Thali filled={distinct} weight={weight} className="h-full w-full" />
+              <CartGraphic count={count} className="h-full w-full" />
             </motion.div>
             <div className="min-w-0 flex-1">
               <p className="text-sm font-semibold text-chalk">
-                {count} {count === 1 ? "item" : "items"} in your thali
+                {count} {count === 1 ? "item" : "items"} in your cart
               </p>
               <p className="text-xs text-chalk/70">Tap to see the bill climb</p>
             </div>
