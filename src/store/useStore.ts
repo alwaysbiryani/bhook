@@ -71,7 +71,7 @@ interface StoreState {
 
 export const useStore = create<StoreState>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       citySlug: DEFAULT_CITY,
       address: null,
       soundOn: true,

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BRAND } from "@/lib/brand";
+import { NewsletterSignup } from "@/components/NewsletterSignup";
 
 const LINKS = [
   { href: "/about", label: "About" },
@@ -24,6 +25,12 @@ export function Footer() {
             ))}
           </nav>
         </div>
+
+        <div className="mt-6">
+          <p className="mb-2 text-sm text-steel">Get updates we&rsquo;ll never send</p>
+          <NewsletterSignup />
+        </div>
+
         <p className="mt-6 max-w-2xl text-xs leading-relaxed text-steel-dim">
           {BRAND.disclaimer} Restaurant names are used descriptively and factually — no logos, no
           brand colours, no implied partnership.

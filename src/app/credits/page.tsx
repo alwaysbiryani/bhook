@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { Footer } from "@/components/layout/Footer";
 
@@ -29,9 +30,9 @@ export default function Credits() {
           <h2 className="pt-4 font-display text-xl text-chalk">A note</h2>
           <p className="text-sm text-steel-dim">
             If you represent a restaurant named here and would like your name removed, see the{" "}
-            <a href="/contact" className="text-bandhani hover:underline">
+            <Link href="/contact" className="text-bandhani hover:underline">
               contact / takedown
-            </a>{" "}
+            </Link>{" "}
             page. We&rsquo;ll act quickly.
           </p>
         </div>

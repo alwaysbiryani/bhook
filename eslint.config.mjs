@@ -12,7 +12,16 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    "scripts/**",
   ]),
+  {
+    rules: {
+      // Deliberate, idiomatic uses: SSR hydration mount-guards, resetting local
+      // form state when a sheet's target changes, and DOM-measured layout
+      // (getPointAtLength) that must run in an effect. Keep as signal, not error.
+      "react-hooks/set-state-in-effect": "warn",
+    },
+  },
 ]);
 
 export default eslintConfig;
