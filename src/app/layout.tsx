@@ -42,6 +42,10 @@ export const metadata: Metadata = {
   applicationName: SITE,
   appleWebApp: { capable: true, title: SITE, statusBarStyle: "black-translucent" },
   openGraph: { title: SITE, description: TAGLINE, siteName: SITE, type: "website" },
+  icons: {
+    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+    apple: [{ url: "/icon.svg" }],
+  },
 };
 
 export const viewport: Viewport = {

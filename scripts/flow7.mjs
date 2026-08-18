@@ -1,0 +1,18 @@
+import { chromium } from "playwright";
+const b = await chromium.launch({ executablePath: "/opt/pw-browsers/chromium" });
+const p = await b.newPage({ viewport: { width: 460, height: 900 }, deviceScaleFactor: 2 });
+await p.goto("http://localhost:3000/hyderabad/paradise", { waitUntil: "load" });
+await p.waitForTimeout(600);
+await p.getByRole("button", { name: "Add" }).first().click();
+await p.waitForTimeout(400);
+await p.getByRole("button", { name: /Add to thali/ }).click();
+await p.waitForTimeout(400);
+await p.goto("http://localhost:3000/checkout", { waitUntil: "load" });
+await p.waitForTimeout(500);
+await p.getByRole("button", { name: /^Pay/ }).click();
+await p.waitForTimeout(2600);
+await p.getByRole("button", { name: /Share what you saved/ }).click();
+await p.waitForTimeout(800);
+await p.screenshot({ path: "/tmp/p7-share.png", fullPage: false });
+console.log("share shot");
+await b.close();

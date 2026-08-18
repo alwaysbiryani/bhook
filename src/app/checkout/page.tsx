@@ -72,7 +72,7 @@ export default function CheckoutPage() {
     return (
       <>
         <SiteHeader />
-        <RewardScreen orderId={placed.id} saved={placed.saved} restaurantName={placed.restaurantName} />
+        <RewardScreen orderId={placed.id} saved={placed.saved} itemTotal={placed.itemTotal} restaurantName={placed.restaurantName} />
       </>
     );
   }

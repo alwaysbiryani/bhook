@@ -41,8 +41,19 @@ export default async function RestaurantPage({
   if (!r || !c || r.citySlug !== c.slug) notFound();
   const dishes = dishesOfRestaurant(r.slug);
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    name: r.name,
+    servesCuisine: r.cuisines,
+    address: { "@type": "PostalAddress", addressLocality: r.area, addressRegion: c.name },
+    aggregateRating: { "@type": "AggregateRating", ratingValue: r.rating, ratingCount: 1000 },
+    priceRange: r.priceForTwo < 400 ? "₹" : r.priceForTwo <= 900 ? "₹₹" : "₹₹₹",
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <SiteHeader cityName={c.name} />
       <main className="flex-1">
         {/* Restaurant header */}

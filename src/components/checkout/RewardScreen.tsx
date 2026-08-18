@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ScratchCard } from "./ScratchCard";
 import { TierLadder } from "./TierLadder";
+import { ShareCard } from "./ShareCard";
+import { Sheet } from "@/components/sheet/Sheet";
 import { PriceTicker } from "@/components/PriceTicker";
 import { useStore } from "@/store/useStore";
 import { inr } from "@/lib/format";
@@ -12,16 +14,19 @@ import { play } from "@/lib/sound";
 export function RewardScreen({
   orderId,
   saved,
+  itemTotal,
   restaurantName,
 }: {
   orderId: string;
   saved: number;
+  itemTotal: number;
   restaurantName: string;
 }) {
   const router = useRouter();
   const lifetimeSaved = useStore((s) => s.lifetimeSaved);
   const orderCount = useStore((s) => s.orders.length);
   const [revealed, setRevealed] = useState(false);
+  const [shareOpen, setShareOpen] = useState(false);
   const firedRef = useRef(false);
 
   const fireConfetti = async () => {
@@ -91,9 +96,34 @@ export function RewardScreen({
           <path d="M9 6l6 6-6 6" />
         </svg>
       </button>
+      <button
+        type="button"
+        onClick={() => setShareOpen(true)}
+        className="mt-3 flex w-full items-center justify-center gap-2 rounded-xl border border-steel/20 px-5 py-3 text-sm font-semibold text-chalk"
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+          <circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" />
+          <path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4" />
+        </svg>
+        Share what you saved
+      </button>
       <p className="mt-3 text-center text-xs text-steel-dim">
         {revealed ? `Ramesh is "leaving" ${restaurantName} now.` : "Scratch the card first. Go on."}
       </p>
+
+      <Sheet open={shareOpen} onClose={() => setShareOpen(false)} labelledBy="share-title">
+        <div className="px-5 pb-8 pt-2">
+          <h2 id="share-title" className="mb-1 text-center font-display text-2xl text-ink">Your receipt</h2>
+          <p className="mb-4 text-center text-sm text-ink/55">Screenshot it, or save the card. Nobody will believe you.</p>
+          <ShareCard
+            saved={saved}
+            itemTotal={itemTotal}
+            restaurantName={restaurantName}
+            lifetimeSaved={lifetimeSaved}
+            orderCount={orderCount}
+          />
+        </div>
+      </Sheet>
     </main>
   );
 }
