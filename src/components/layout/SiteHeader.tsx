@@ -15,6 +15,7 @@ export function SiteHeader({ cityName }: { cityName?: string }) {
   const toggleSound = useStore((s) => s.toggleSound);
   const count = useStore(selectCartCount);
   const openCity = useUI((s) => s.openCity);
+  const openSearch = useUI((s) => s.openSearch);
 
   useEffect(() => setMounted(true), []);
   useEffect(() => setMuted(!soundOn), [soundOn]);
@@ -45,6 +46,17 @@ export function SiteHeader({ cityName }: { cityName?: string }) {
         </button>
 
         <div className="ml-auto flex items-center gap-2 sm:gap-3">
+          <button
+            type="button"
+            onClick={openSearch}
+            aria-label="Search"
+            className="rounded-lg p-1.5 text-steel hover:text-chalk"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+              <circle cx="11" cy="11" r="7" />
+              <path d="M21 21l-4.3-4.3" />
+            </svg>
+          </button>
           <button
             type="button"
             onClick={toggleSound}

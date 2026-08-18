@@ -2,8 +2,8 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { Footer } from "@/components/layout/Footer";
-import { RestaurantCard } from "@/components/RestaurantCard";
-import { cities, getCity, restaurantsInCity } from "@/data";
+import { CityRestaurants, type CityItem } from "@/components/CityRestaurants";
+import { cities, getCity, restaurantsInCity, dishesOfRestaurant } from "@/data";
 
 export function generateStaticParams() {
   return cities.map((c) => ({ city: c.slug }));
@@ -33,6 +33,18 @@ export default async function CityPage({
   if (!c) notFound();
   const restaurants = restaurantsInCity(c.slug);
 
+  const items: CityItem[] = restaurants.map((r) => {
+    const ds = dishesOfRestaurant(r.slug);
+    return {
+      r,
+      facts: {
+        jain: ds.some((d) => d.jainPossible),
+        nog: ds.some((d) => d.noOnionGarlicPossible),
+        mild: ds.some((d) => d.spiceDefault >= 0 && d.spiceDefault <= 1),
+      },
+    };
+  });
+
   return (
     <>
       <SiteHeader cityName={c.name} />
@@ -48,11 +60,7 @@ export default async function CityPage({
           </p>
         </section>
         <section className="mx-auto w-full max-w-5xl px-5 py-6">
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {restaurants.map((r) => (
-              <RestaurantCard key={r.slug} r={r} />
-            ))}
-          </div>
+          <CityRestaurants items={items} />
         </section>
       </main>
       <Footer />

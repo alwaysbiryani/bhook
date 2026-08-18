@@ -4,6 +4,8 @@ import { Footer } from "@/components/layout/Footer";
 import { RestaurantCard } from "@/components/RestaurantCard";
 import { DishImage } from "@/components/DishImage";
 import { VegMark } from "@/components/ui/VegMark";
+import { HeroTagline } from "@/components/HeroTagline";
+import { SearchTrigger } from "@/components/SearchTrigger";
 import {
   getCity,
   restaurantsInCity,
@@ -26,7 +28,7 @@ export default function Home() {
       <main className="flex-1">
         {/* Hero */}
         <section className="mx-auto w-full max-w-5xl px-5 pt-10 pb-8 sm:pt-14">
-          <p className="text-sm font-medium text-turmeric">Baarish hai. Pakode?</p>
+          <HeroTagline />
           <h1 className="mt-3 max-w-2xl font-display text-4xl leading-[1.05] text-chalk sm:text-6xl">
             Order the feeling.
             <br />
@@ -37,14 +39,7 @@ export default function Home() {
             coupon, pay <span className="tnum">₹0</span>, and track a rider who never quite arrives.
           </p>
 
-          {/* Search (interactive in Phase 6) */}
-          <div className="mt-6 flex max-w-lg items-center gap-2 rounded-xl border border-steel/15 bg-ink-2/60 px-4 py-3 text-steel-dim">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-              <circle cx="11" cy="11" r="7" />
-              <path d="M21 21l-4.3-4.3" />
-            </svg>
-            <span className="text-sm">Search &ldquo;biryani&rdquo;, &ldquo;haleem&rdquo;, &ldquo;chai&rdquo;…</span>
-          </div>
+          <SearchTrigger />
         </section>
 
         {/* Cuisine rail */}

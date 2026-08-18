@@ -6,12 +6,6 @@ import { useUI } from "@/store/useUI";
 import { useStore } from "@/store/useStore";
 import { cities } from "@/data";
 
-/** All 14 cities ship in Phase 6; for now two are live and the rest are teased. */
-const COMING_SOON = [
-  "Mumbai", "Kolkata", "Lucknow", "Amritsar", "Chennai",
-  "Bengaluru", "Jaipur", "Indore", "Ahmedabad", "Kozhikode", "Goa", "Shillong",
-];
-
 export function CityPicker() {
   const open = useUI((s) => s.cityOpen);
   const close = useUI((s) => s.closeCity);
@@ -43,17 +37,9 @@ export function CityPicker() {
             </button>
           ))}
         </div>
-
-        <p className="mt-6 mb-2 text-xs font-bold uppercase tracking-wider text-ink/40">
-          Coming soon
+        <p className="mt-5 text-center text-xs text-ink/40">
+          14 cities. 86 legendary kitchens. Zero deliveries.
         </p>
-        <div className="flex flex-wrap gap-2">
-          {COMING_SOON.map((n) => (
-            <span key={n} className="rounded-full border border-ink/10 px-3 py-1 text-sm text-ink/35">
-              {n}
-            </span>
-          ))}
-        </div>
       </div>
     </Sheet>
   );

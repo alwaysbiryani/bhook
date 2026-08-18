@@ -5,6 +5,7 @@ import { FloatingThali } from "@/components/thali/FloatingThali";
 import { CityPicker } from "@/components/CityPicker";
 import { AddressSheet } from "@/components/AddressSheet";
 import { CouponDrawer } from "@/components/CouponDrawer";
+import { SearchOverlay } from "@/components/SearchOverlay";
 
 /** All globally-mounted interactive overlays. Rendered once in the root layout. */
 export function AppChrome() {
@@ -15,6 +16,7 @@ export function AppChrome() {
       <CityPicker />
       <AddressSheet />
       <CouponDrawer />
+      <SearchOverlay />
     </>
   );
 }
