@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { Footer } from "@/components/layout/Footer";
-import { RestaurantCard } from "@/components/RestaurantCard";
 import { DishImage } from "@/components/DishImage";
 import { VegMark } from "@/components/ui/VegMark";
 import { HeroTagline } from "@/components/HeroTagline";
 import { SearchTrigger } from "@/components/SearchTrigger";
+import { LocationBar } from "@/components/LocationBar";
+import { CuisineFeed } from "@/components/CuisineFeed";
 import {
   getCity,
   restaurantsInCity,
@@ -20,7 +21,7 @@ export default function Home() {
   const city = getCity(DEFAULT_CITY)!;
   const restaurants = restaurantsInCity(city.slug);
   const trending = bestsellersInCity(city.slug, 8);
-  const cuisines = cuisinesInCity(city.slug).slice(0, 8);
+  const cuisines = cuisinesInCity(city.slug).slice(0, 10);
 
   return (
     <>
@@ -39,21 +40,11 @@ export default function Home() {
             coupon, pay <span className="tnum">₹0</span>, and track a rider who never quite arrives.
           </p>
 
-          <SearchTrigger />
-        </section>
-
-        {/* Cuisine rail */}
-        <section className="mx-auto w-full max-w-5xl px-5 py-4">
-          <div className="no-scrollbar flex gap-2 overflow-x-auto pb-1">
-            {cuisines.map((c) => (
-              <span
-                key={c}
-                className="whitespace-nowrap rounded-full border border-line/15 px-4 py-1.5 text-sm text-muted"
-              >
-                {c}
-              </span>
-            ))}
+          <div className="mt-6">
+            <LocationBar cityName={city.name} />
           </div>
+
+          <SearchTrigger />
         </section>
 
         {/* Trending dishes */}
@@ -86,22 +77,8 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Restaurant grid */}
-        <section className="mx-auto w-full max-w-5xl px-5 py-6">
-          <div className="mb-4 flex items-baseline justify-between">
-            <h2 className="font-display text-2xl text-fg">
-              {restaurants.length} places that never deliver
-            </h2>
-            <Link href={`/${city.slug}`} className="text-sm text-bandhani hover:underline">
-              See all
-            </Link>
-          </div>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {restaurants.map((r, i) => (
-              <RestaurantCard key={r.slug} r={r} priority={i < 3} />
-            ))}
-          </div>
-        </section>
+        {/* Restaurant feed with working cuisine tags */}
+        <CuisineFeed restaurants={restaurants} cuisines={cuisines} citySlug={city.slug} />
       </main>
       <Footer />
     </>

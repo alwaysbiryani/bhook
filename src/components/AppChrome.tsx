@@ -3,8 +3,7 @@
 import { useEffect } from "react";
 import { DishSheet } from "@/components/DishSheet";
 import { FloatingCart } from "@/components/cart/FloatingCart";
-import { CityPicker } from "@/components/CityPicker";
-import { AddressSheet } from "@/components/AddressSheet";
+import { LocationSheet } from "@/components/LocationSheet";
 import { CouponDrawer } from "@/components/CouponDrawer";
 import { SearchOverlay } from "@/components/SearchOverlay";
 import { PWARegister } from "@/components/PWARegister";
@@ -30,8 +29,7 @@ export function AppChrome() {
     <>
       <DishSheet />
       <FloatingCart />
-      <CityPicker />
-      <AddressSheet />
+      <LocationSheet />
       <CouponDrawer />
       <SearchOverlay />
       <PWARegister />
