@@ -73,7 +73,7 @@ export function Sheet({
             aria-modal="true"
             aria-labelledby={labelledBy}
             tabIndex={-1}
-            className={`relative w-full ${maxWidth} max-h-[92vh] overflow-y-auto rounded-t-3xl bg-card text-fg shadow-sheet outline-none sm:rounded-3xl`}
+            className={`safe-bottom relative w-full ${maxWidth} max-h-[92dvh] overflow-y-auto overscroll-contain rounded-t-3xl bg-card text-fg shadow-sheet outline-none sm:rounded-3xl`}
             initial={reduce ? { opacity: 0 } : { y: "100%" }}
             animate={reduce ? { opacity: 1 } : { y: 0 }}
             exit={reduce ? { opacity: 0 } : { y: "100%" }}

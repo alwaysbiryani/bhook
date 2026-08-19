@@ -11,7 +11,7 @@ import { BillBreakdown } from "@/components/BillBreakdown";
 import { useStore } from "@/store/useStore";
 import { useUI } from "@/store/useUI";
 import { cartTotals } from "@/lib/cart";
-import { getRestaurant } from "@/data";
+import { useCatalogue } from "@/lib/catalogue";
 import { rupee } from "@/lib/format";
 
 export default function CartPage() {
@@ -23,8 +23,9 @@ export default function CartPage() {
   const decLine = useStore((s) => s.decLine);
   const openAddress = useUI((s) => s.openAddress);
 
+  const catalogue = useCatalogue(lines.length > 0);
   const { count, hydrated } = cartTotals(lines);
-  const restaurant = cartRestaurant ? getRestaurant(cartRestaurant) : undefined;
+  const restaurant = catalogue && cartRestaurant ? catalogue.getRestaurant(cartRestaurant) : undefined;
 
   if (count === 0) {
     return (
@@ -109,9 +110,9 @@ export default function CartPage() {
               </div>
               <div className="flex flex-col items-end justify-between">
                 <div className="flex items-center rounded-lg border border-line/20">
-                  <button onClick={() => decLine(line.key)} className="px-2.5 py-1 text-bandhani" aria-label="Decrease">−</button>
+                  <button onClick={() => decLine(line.key)} className="inline-flex min-h-11 min-w-11 items-center justify-center text-bandhani active:bg-bandhani/10" aria-label="Decrease quantity">−</button>
                   <span className="tnum w-5 text-center text-sm text-fg">{line.qty}</span>
-                  <button onClick={() => incLine(line.key)} className="px-2.5 py-1 text-bandhani" aria-label="Increase">+</button>
+                  <button onClick={() => incLine(line.key)} className="inline-flex min-h-11 min-w-11 items-center justify-center text-bandhani active:bg-bandhani/10" aria-label="Increase quantity">+</button>
                 </div>
                 <span className="tnum mt-2 text-sm font-semibold text-fg">{rupee(lineTotal)}</span>
               </div>

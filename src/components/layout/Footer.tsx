@@ -13,7 +13,7 @@ const LINKS = [
 export function Footer() {
   return (
     <footer className="mt-auto border-t border-line/10 bg-card/60">
-      <div className="mx-auto w-full max-w-5xl px-5 py-8">
+      <div className="safe-x mx-auto w-full max-w-5xl px-5 pt-8 pb-[calc(2rem+env(safe-area-inset-bottom))]">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <Link href="/" aria-label={`${BRAND.name} — home`}>
             <Logo className="text-lg" full />

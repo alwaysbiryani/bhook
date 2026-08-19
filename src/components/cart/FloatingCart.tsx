@@ -8,6 +8,7 @@ import { PriceTicker } from "@/components/PriceTicker";
 import { useStore } from "@/store/useStore";
 import { useUI } from "@/store/useUI";
 import { cartTotals } from "@/lib/cart";
+import { useCatalogue } from "@/lib/catalogue";
 
 /** The persistent floating mini-cart. Appears when the cart has items, pulses on
  *  each add, and taps through to the full cart (/cart). Hidden on cart/checkout. */
@@ -16,6 +17,8 @@ export function FloatingCart() {
   const pulse = useUI((s) => s.cartPulse);
   const pathname = usePathname();
 
+  // Resolve line prices once the catalogue is available (only if there's a cart).
+  useCatalogue(lines.length > 0);
   const { itemTotal, count } = cartTotals(lines);
 
   const hidden = count === 0 || pathname === "/cart" || pathname === "/checkout";
@@ -24,7 +27,7 @@ export function FloatingCart() {
     <AnimatePresence>
       {!hidden && (
         <motion.div
-          className="fixed inset-x-0 bottom-4 z-40 flex justify-center px-4"
+          className="fixed inset-x-0 bottom-[calc(1rem+env(safe-area-inset-bottom))] z-40 flex justify-center px-4"
           initial={{ y: 80, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 80, opacity: 0 }}

@@ -1,6 +1,6 @@
 import type { CartLine } from "@/store/useStore";
 import type { Coupon } from "@/data/schema";
-import { COUPONS } from "@/data";
+import { COUPONS } from "@/data/client";
 import { cartTotals } from "@/lib/cart";
 
 const DELIVERY_ORIG = 49;

@@ -1,92 +1,27 @@
-import { z } from "zod";
-import { CITIES } from "./cities";
-import { RESTAURANTS } from "./restaurants";
-import { DISHES } from "./dishes";
-import { COUPONS_RAW } from "./coupons";
-import { buildFiller } from "./filler";
-import {
-  validateAll,
-  CouponSchema,
-  type City,
-  type Restaurant,
-  type Dish,
-  type Coupon,
-} from "./schema";
-
 /**
- * Validate the whole dataset once, at module load (i.e. build time for static
- * pages). A bad reference or an MRP below base price fails the build. Real,
- * web-verified restaurants are topped up per city with fictional cloud kitchens
- * (see filler.ts) so each city feels full.
+ * Server-facing data entry. Re-exports the full catalogue and lookups from
+ * `./core`, and keeps the zod safety net that validates the whole dataset.
+ *
+ * Server components import from `@/data`; the validation below therefore runs
+ * at build time (SSG) and in dev, catching a bad reference or an MRP below base
+ * price. It is deliberately kept OUT of the client path: global chrome imports
+ * `@/data/client` (tiny) and the search / dish overlays lazily import
+ * `@/data/core` (zod-free), so no browser ever downloads zod.
  */
-const filler = buildFiller(CITIES, RESTAURANTS, 50);
-const validated = validateAll({
-  cities: CITIES,
-  restaurants: [...RESTAURANTS, ...filler.restaurants],
-  dishes: [...DISHES, ...filler.dishes],
-});
+import { cities, restaurants, dishes } from "./core";
 
-export const cities: City[] = validated.cities;
-export const restaurants: Restaurant[] = validated.restaurants;
-export const dishes: Dish[] = validated.dishes;
+export * from "./core";
 
-/** Only the real, web-verified restaurants — used for static generation + sitemap. */
-export const realRestaurants: Restaurant[] = restaurants.filter((r) => !r.fictional);
-export const realDishes: Dish[] = dishes.filter((d) => {
-  const r = getRestaurant(d.restaurantSlug);
-  return r ? !r.fictional : true;
-});
-
-export const COUPONS: Coupon[] = z.array(CouponSchema).parse(COUPONS_RAW);
-
-export { RIDERS, RIDER_PINGS } from "./riders";
-export { SPICE_LEVELS, OPTION_GROUPS, ADDON_GROUP, getOptionGroup } from "./options";
-export type { City, Restaurant, Dish } from "./schema";
-
-/* --------------------------------- lookups -------------------------------- */
-
-export function getCity(slug: string): City | undefined {
-  return cities.find((c) => c.slug === slug);
-}
-
-export function getRestaurant(slug: string): Restaurant | undefined {
-  return restaurants.find((r) => r.slug === slug);
-}
-
-export function getDish(slug: string): Dish | undefined {
-  return dishes.find((d) => d.slug === slug);
-}
-
-export function restaurantsInCity(citySlug: string): Restaurant[] {
-  return restaurants.filter((r) => r.citySlug === citySlug);
-}
-
-export function dishesOfRestaurant(restaurantSlug: string): Dish[] {
-  return dishes.filter((d) => d.restaurantSlug === restaurantSlug);
-}
-
-export function restaurantOfDish(dish: Dish): Restaurant | undefined {
-  return getRestaurant(dish.restaurantSlug);
-}
-
-export function bestsellersInCity(citySlug: string, limit = 12): Dish[] {
-  return dishes
-    .filter((d) => d.citySlug === citySlug && d.bestseller)
-    .slice(0, limit);
-}
-
-/** Top-rated restaurants in a city — the top `pct` by rating (min 4, max 12). */
-export function topRatedInCity(citySlug: string, pct = 0.2): Restaurant[] {
-  const all = restaurantsInCity(citySlug).slice().sort((a, b) => b.rating - a.rating);
-  const n = Math.min(12, Math.max(4, Math.round(all.length * pct)));
-  return all.slice(0, n);
-}
-
-/** Cuisines available in a city, most common first. */
-export function cuisinesInCity(citySlug: string): string[] {
-  const counts = new Map<string, number>();
-  for (const r of restaurantsInCity(citySlug)) {
-    for (const c of r.cuisines) counts.set(c, (counts.get(c) ?? 0) + 1);
-  }
-  return [...counts.entries()].sort((a, b) => b[1] - a[1]).map(([c]) => c);
+// Build-time / dev validation only — never on a production request's hot path,
+// and never in a client bundle (no client module imports `@/data`).
+if (
+  process.env.NODE_ENV !== "production" ||
+  process.env.NEXT_PHASE === "phase-production-build"
+) {
+  // Dynamic import so zod is dead-code-eliminated from production runtime.
+  import("./schema")
+    .then(({ validateAll }) => validateAll({ cities, restaurants, dishes }))
+    .catch((e) => {
+      console.error("[data] dataset validation failed:", e);
+    });
 }

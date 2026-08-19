@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { Sheet } from "@/components/sheet/Sheet";
 import { useUI } from "@/store/useUI";
 import { useStore } from "@/store/useStore";
-import { getCity } from "@/data";
+import { getCity } from "@/data/client";
 
 const LABELS = ["Home", "Work", "Other"] as const;
 

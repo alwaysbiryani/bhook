@@ -9,7 +9,8 @@ import { RewardScreen } from "@/components/checkout/RewardScreen";
 import { useStore, type Order } from "@/store/useStore";
 import { useUI } from "@/store/useUI";
 import { computeBill } from "@/lib/bill";
-import { getRestaurant, RIDERS } from "@/data";
+import { useCatalogue } from "@/lib/catalogue";
+import { RIDERS } from "@/data/riders";
 import { primeAudio } from "@/lib/sound";
 
 type Method = "upi" | "card" | "cod";
@@ -38,8 +39,9 @@ export default function CheckoutPage() {
   const [phase, setPhase] = useState<Phase>("form");
   const [placed, setPlaced] = useState<Order | null>(null);
 
-  const restaurant = cartRestaurant ? getRestaurant(cartRestaurant) : undefined;
-  const bill = useMemo(() => computeBill(lines, appliedCoupons), [lines, appliedCoupons]);
+  const catalogue = useCatalogue(lines.length > 0);
+  const restaurant = catalogue && cartRestaurant ? catalogue.getRestaurant(cartRestaurant) : undefined;
+  const bill = useMemo(() => computeBill(lines, appliedCoupons), [lines, appliedCoupons, catalogue]);
 
   const startPay = () => {
     if (!restaurant || lines.length === 0) return;

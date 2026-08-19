@@ -65,9 +65,10 @@ export default async function CityPage({
         <section className="mx-auto w-full max-w-5xl px-5 py-4">
           <h2 className="mb-3 font-display text-2xl text-fg">Top rated in {c.name}</h2>
           <div className="no-scrollbar -mx-5 flex gap-4 overflow-x-auto px-5 pb-2">
-            {topRated.map((r) => (
+            {topRated.map((r, i) => (
               <div key={r.slug} className="w-64 shrink-0">
-                <RestaurantCard r={r} />
+                {/* The first rail card is the above-the-fold LCP on this route. */}
+                <RestaurantCard r={r} priority={i < 2} />
               </div>
             ))}
           </div>

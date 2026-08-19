@@ -6,7 +6,7 @@ import { Sheet } from "@/components/sheet/Sheet";
 import { DishImage } from "@/components/DishImage";
 import { VegMark } from "@/components/ui/VegMark";
 import { useUI } from "@/store/useUI";
-import { dishes, restaurants, getRestaurant, getCity } from "@/data";
+import { useCatalogue } from "@/lib/catalogue";
 import { rupee } from "@/lib/format";
 
 const POPULAR = ["Biryani", "Haleem", "Dosa", "Chai", "Butter chicken", "Vada pav", "Kulcha"];
@@ -17,22 +17,29 @@ export function SearchOverlay() {
   const openDish = useUI((s) => s.openDish);
   const router = useRouter();
   const [q, setQ] = useState("");
+  // Catalogue loads lazily once the overlay opens (usually already warming from
+  // the tap that opened it).
+  const catalogue = useCatalogue(open);
+  const getCity = catalogue?.getCity;
+  const getRestaurant = catalogue?.getRestaurant;
 
   const query = q.trim().toLowerCase();
 
   const results = useMemo(() => {
-    if (query.length < 2) return { rests: [], dish: [] };
-    const rests = restaurants
+    if (!catalogue || query.length < 2) return { rests: [], dish: [] };
+    const rests = catalogue.restaurants
       .filter((r) => {
-        const city = getCity(r.citySlug)?.name ?? "";
+        const city = catalogue.getCity(r.citySlug)?.name ?? "";
         return `${r.name} ${r.cuisines.join(" ")} ${r.area} ${city}`.toLowerCase().includes(query);
       })
       .slice(0, 6);
-    const dish = dishes
+    const dish = catalogue.dishes
       .filter((d) => `${d.name} ${d.tags.join(" ")}`.toLowerCase().includes(query))
       .slice(0, 10);
     return { rests, dish };
-  }, [query]);
+  }, [query, catalogue]);
+
+  const searching = query.length >= 2 && !catalogue;
 
   const go = (href: string) => {
     close();
@@ -57,7 +64,7 @@ export function SearchOverlay() {
             aria-label="Search"
           />
           {q && (
-            <button onClick={() => setQ("")} className="text-fg/40" aria-label="Clear">✕</button>
+            <button onClick={() => setQ("")} className="-mr-2 inline-flex min-h-11 min-w-11 items-center justify-center text-fg/40 active:text-fg" aria-label="Clear search">✕</button>
           )}
         </div>
 
@@ -72,6 +79,8 @@ export function SearchOverlay() {
               ))}
             </div>
           </div>
+        ) : searching ? (
+          <p className="mt-8 text-center text-fg/50">Searching…</p>
         ) : results.rests.length === 0 && results.dish.length === 0 ? (
           <p className="mt-8 text-center text-fg/50">
             Nothing matches &ldquo;{q}&rdquo;. It never came either.
@@ -93,7 +102,7 @@ export function SearchOverlay() {
                       </div>
                       <div className="min-w-0">
                         <p className="truncate text-sm font-medium text-fg">{r.name}</p>
-                        <p className="truncate text-xs text-fg/50">{r.cuisines.slice(0, 3).join(" · ")} · {getCity(r.citySlug)?.name}</p>
+                        <p className="truncate text-xs text-fg/50">{r.cuisines.slice(0, 3).join(" · ")} · {getCity?.(r.citySlug)?.name}</p>
                       </div>
                     </button>
                   ))}
@@ -105,7 +114,8 @@ export function SearchOverlay() {
                 <p className="mb-2 text-xs font-bold uppercase tracking-wider text-fg/40">Dishes</p>
                 <div className="space-y-1">
                   {results.dish.map((d) => {
-                    const r = getRestaurant(d.restaurantSlug)!;
+                    const r = getRestaurant?.(d.restaurantSlug);
+                    if (!r) return null;
                     return (
                       <button
                         key={d.slug}
@@ -120,7 +130,7 @@ export function SearchOverlay() {
                             <VegMark diet={d.diet} size={12} />
                             <p className="truncate text-sm font-medium text-fg">{d.name}</p>
                           </div>
-                          <p className="truncate text-xs text-fg/50">{r.name} · {getCity(d.citySlug)?.name}</p>
+                          <p className="truncate text-xs text-fg/50">{r.name} · {getCity?.(d.citySlug)?.name}</p>
                         </div>
                         <span className="tnum shrink-0 text-sm font-semibold text-fg">{rupee(d.basePrice)}</span>
                       </button>

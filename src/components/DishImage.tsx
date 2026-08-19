@@ -217,6 +217,9 @@ export function DishImage({
       alt={alt}
       className={`object-cover ${className ?? ""}`}
       loading={eager ? "eager" : "lazy"}
+      // Above-the-fold hero art is usually the LCP element — hint the browser to
+      // decode/paint it first instead of letting it queue behind everything else.
+      fetchPriority={eager ? "high" : "auto"}
       decoding="async"
       draggable={false}
     />
