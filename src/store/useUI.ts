@@ -2,10 +2,15 @@
 
 import { create } from "zustand";
 
+/** Which step of the unified location flow the sheet opens on. */
+export type LocationStage = "search" | "pin";
+
 interface UIState {
   dishSlug: string | null;
-  addressOpen: boolean;
-  cityOpen: boolean;
+  /** The single "Deliver to" sheet (search → map pin). Replaces the old
+   *  separate city-picker and address sheets. */
+  locationOpen: boolean;
+  locationStage: LocationStage;
   couponOpen: boolean;
   searchOpen: boolean;
   /** bumps each add-to-cart so the floating cart can pulse. */
@@ -13,10 +18,12 @@ interface UIState {
 
   openDish: (slug: string) => void;
   closeDish: () => void;
-  openAddress: () => void;
-  closeAddress: () => void;
+  /** Open the location sheet on the search step (change city / area). */
   openCity: () => void;
-  closeCity: () => void;
+  /** Open the location sheet straight on the map-pin step (fine-tune address). */
+  openAddress: () => void;
+  setLocationStage: (stage: LocationStage) => void;
+  closeLocation: () => void;
   openCoupon: () => void;
   closeCoupon: () => void;
   openSearch: () => void;
@@ -26,18 +33,18 @@ interface UIState {
 
 export const useUI = create<UIState>((set) => ({
   dishSlug: null,
-  addressOpen: false,
-  cityOpen: false,
+  locationOpen: false,
+  locationStage: "search",
   couponOpen: false,
   searchOpen: false,
   cartPulse: 0,
 
   openDish: (slug) => set({ dishSlug: slug }),
   closeDish: () => set({ dishSlug: null }),
-  openAddress: () => set({ addressOpen: true }),
-  closeAddress: () => set({ addressOpen: false }),
-  openCity: () => set({ cityOpen: true }),
-  closeCity: () => set({ cityOpen: false }),
+  openCity: () => set({ locationOpen: true, locationStage: "search" }),
+  openAddress: () => set({ locationOpen: true, locationStage: "pin" }),
+  setLocationStage: (stage) => set({ locationStage: stage }),
+  closeLocation: () => set({ locationOpen: false }),
   openCoupon: () => set({ couponOpen: true }),
   closeCoupon: () => set({ couponOpen: false }),
   openSearch: () => set({ searchOpen: true }),
