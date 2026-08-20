@@ -33,7 +33,7 @@ export function RestaurantCard({ r, priority = false }: { r: Restaurant; priorit
           className="h-full w-full transition duration-500 group-hover:scale-105"
         />
         <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-page to-transparent" />
-        <span className="absolute bottom-2.5 left-3 rounded-md bg-turmeric px-2 py-0.5 text-[11px] font-bold text-ink">
+        <span className="absolute bottom-2.5 left-3 rounded-md bg-page/85 px-2 py-0.5 text-[11px] font-bold text-fg backdrop-blur-sm">
           {r.prepMins}–{r.prepMins + 8} min
         </span>
         {r.fictional && (

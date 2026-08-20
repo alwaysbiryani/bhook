@@ -101,9 +101,9 @@ export default function CartPage() {
                 <DishImage art={dish.art} hue={r.hue} seed={dish.slug} alt={dish.name} variant="thumb" className="h-full w-full" />
               </div>
               <div className="min-w-0 flex-1">
-                <div className="flex items-center gap-1.5">
+                <div className="flex items-start gap-1.5">
                   <VegMark diet={dish.diet} size={13} />
-                  <h3 className="truncate text-sm font-medium text-fg">{dish.name}</h3>
+                  <h3 className="line-clamp-2 text-sm font-medium leading-snug text-fg">{dish.name}</h3>
                 </div>
                 {summary && <p className="mt-0.5 line-clamp-1 text-xs text-dim">{summary}</p>}
                 <p className="tnum mt-1 text-xs text-dim">{rupee(unit)} each</p>

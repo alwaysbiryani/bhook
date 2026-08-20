@@ -18,12 +18,10 @@ export function DishRow({ dish, hue }: { dish: Dish; hue: number }) {
             </span>
           )}
         </div>
-        <h3 className="font-medium leading-tight text-fg">
-          {dish.name}
-          {dish.nameDeva && (
-            <span className="font-deva ml-2 text-sm text-dim">{dish.nameDeva}</span>
-          )}
-        </h3>
+        <h3 className="font-medium leading-tight text-fg">{dish.name}</h3>
+        {dish.nameDeva && (
+          <p className="font-deva mt-0.5 text-sm leading-tight text-dim">{dish.nameDeva}</p>
+        )}
         <div className="mt-1 flex items-center gap-2">
           <span className="tnum font-semibold text-fg">{rupee(dish.basePrice)}</span>
           <span className="tnum text-sm text-dim line-through">{rupee(dish.mrp)}</span>
